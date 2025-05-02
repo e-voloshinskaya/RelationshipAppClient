@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- ── App & Navigation ───────────────────────────── -->
+    <string name="app_name">MyApp</string>
+
+    <string name="nav_home">Сегодня</string>
+    <string name="nav_explore">Изучение</string>
+    <string name="nav_history">История</string>
+    <string name="nav_profile">Профиль</string>
+
+    <!-- ── Home screen ────────────────────────── -->
+    <string name="screen_title_today">Сегодня</string>
+    <string name="notification">Уведомления</string>
+
+    <string name="section_title_tasks">Задачи</string>
+    <string name="section_title_how_do_you_feel">Как вы себя чувствуете?</string>
+    <string name="cd_mood_terrible">Настроение: плохое</string>
+    <string name="cd_mood_bad">Настроение: так себе</string>
+    <string name="cd_mood_ok">Настроение: нормальное</string>
+    <string name="cd_mood_good">Настроение: хорошее</string>
+    <string name="cd_mood_great">Настроение: отличное</string>
+
+    <string name="section_title_planned_for_today">Запланировано на сегодня:</string>
+    <string name="tasks_status_none">Планов нет</string>
+    <string name="button_add_reminder">Добавить напоминание</string>
+
+    <string name="section_title_add_entry">Добавьте запись: сделайте вклад в банк эмоций</string>
+    <string name="button_add_entry">Добавить запись</string>
+
+    <string name="section_title_notes">Заметки</string>
+    <string name="button_create_note">Создать заметку</string>
+
+    <string name="section_title_check_relationships">Проверьте ваши отношения: тест</string>
+    <string name="button_take_test">Пройти тест</string>
+
+    <string name="section_title_statistics">Статистика</string>
+    <string name="statistics_placeholder">Скоро здесь будет статистика</string>
+
+    <!-- ── Profile screen ────────────────────────── -->
+    <string name="screen_title_profile">Профиль</string>
+    <string name="settings">Настройки</string>
+
+    <string name="user_pic">Аватар пользователя</string>
+    <string name="partner_pic">Аватар партнера</string>
+    <string name="together_for">4 года 2 недели 3 дня</string>
+    <string name="together">Вместе</string>
+    <string name="and"><![CDATA[&]]></string>
+
+    <string name="achievements">Достижения</string>
+    <string name="see_all">Смотреть все</string>
+    <string name="achievement_icon">Иконка достижения</string>
+    <string name="special_dates">Важные даты</string>
+    <string name="in_9">Через 6 месяцев</string>
+    <string name="date_date">12\nНояб</string>
+    <string name="marriage_date">Годовщина свадьбы</string>
+    <string name="add_spec_date">Добавить важную дату</string>
+    <string name="your_activity">Ваша активность</string>
+    <string name="modules_done">Модулей пройдено</string>
+    <string name="tasks_done">Заданий выполнено</string>
+    <string name="share">Поделиться</string>
+    <string name="cur_streak">Текущая серия дней</string>
+    <string name="edit">Изменить информацию о важной дате</string>
+    <string name="dash">-</string>
+    <string name="screen_title_observe">Изучение</string>
+    <string name="notes">Заметки</string>
+
+    <!-- ── Home screen ────────────────────────── -->
+
+
+</resources>

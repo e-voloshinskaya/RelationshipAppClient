@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/homeFragment">
+
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.example.myapplication.ui.HomeFragment"
+        android:label="Home" />
+
+    <fragment
+        android:id="@+id/exploreFragment"
+        android:name="com.example.myapplication.ui.ExploreFragment"
+        android:label="Explore" />
+
+    <fragment
+        android:id="@+id/insightsFragment"
+        android:name="com.example.myapplication.ui.InsightsFragment"
+        android:label="Insights" />
+
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.example.myapplication.ui.ProfileFragment"
+        android:label="Profile" />
+
+    <!-- Пример дополнительного экрана
+    <fragment
+        android:id="@+id/detailsFragment"
+        android:name="com.example.myapplication.ui.details.DetailsFragment"
+        android:label="Details" /> -->
+
+</navigation>

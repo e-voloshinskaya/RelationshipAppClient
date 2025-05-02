@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!--
+    <declare-styleable name="TimelineItem">
+        <attr name="tl_title" format="string"/>
+        <attr name="tl_color" format="color"/>
+        <attr name="tl_text" format="string"/>
+        <attr name="tl_has_icons" format="boolean"/>
+        <attr name="colorOnCard" format="color"/>
+    </declare-styleable> -->
+</resources>

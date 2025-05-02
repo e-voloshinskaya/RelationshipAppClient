@@ -1,0 +1,714 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="?attr/colorSurface"
+    tools:context="com.example.myapplication.ui.HomeFragment">
+
+    <!-- Заголовок экрана и иконка уведомлений -->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/header_container"
+        android:layout_width="0dp"
+        android:layout_height="56dp"
+        android:background="?attr/colorSurface"
+        android:elevation="8dp"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <TextView
+            android:id="@+id/text_home_title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:text="@string/screen_title_profile"
+            android:textAppearance="?attr/textAppearanceHeadlineSmall"
+            android:textColor="?attr/colorOnSurface"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/icon_notifications"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/icon_notifications"
+            android:layout_width="30dp"
+            android:layout_height="36dp"
+            android:contentDescription="@string/settings"
+            android:src="@drawable/ic_settings"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:tint="?attr/colorOnSurfaceVariant" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    <!-- Прокручиваемая область контента -->
+    <ScrollView
+        android:id="@+id/scrollView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:fillViewport="true"
+        app:layout_constraintBottom_toTopOf="@+id/bottomNavContainer"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:clipToPadding="false"
+            android:orientation="vertical"
+            android:paddingStart="16dp"
+            android:paddingTop="72dp"
+            android:paddingEnd="16dp">
+
+            <!-- res/layout/card_sunset.xml -->
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="12dp"
+                app:cardBackgroundColor="@android:color/white"
+                app:cardCornerRadius="20dp"
+                app:cardElevation="6dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/gradient_ocean"
+                    android:orientation="vertical"
+                    android:paddingHorizontal="10dp"
+                    android:paddingVertical="16dp">
+
+                    <!-- Используем ConstraintLayout для идеального выравнивания -->
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="12dp">
+
+                        <ImageView
+                            android:id="@+id/avatar_left"
+                            android:layout_width="80dp"
+                            android:layout_height="80dp"
+                            android:layout_marginStart="0dp"
+                            android:layout_marginEnd="30dp"
+                            android:background="@drawable/circle_background"
+                            android:contentDescription="@string/user_pic"
+                            android:padding="16dp"
+                            android:scaleType="centerInside"
+                            android:src="@drawable/ic_woman"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toStartOf="@id/ampersand"
+                            app:layout_constraintHorizontal_chainStyle="packed"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:id="@+id/ampersand"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="0dp"
+                            android:layout_marginEnd="0dp"
+                            android:fontFamily="sans-serif-medium"
+                            android:text="@string/and"
+                            android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
+                            android:textColor="@color/colorOnSurface"
+                            android:textSize="18sp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toStartOf="@id/avatar_right"
+                            app:layout_constraintStart_toEndOf="@id/avatar_left"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <ImageView
+                            android:id="@+id/avatar_right"
+                            android:layout_width="80dp"
+                            android:layout_height="80dp"
+                            android:layout_marginStart="30dp"
+                            android:layout_marginEnd="0dp"
+                            android:background="@drawable/circle_background"
+                            android:contentDescription="@string/partner_pic"
+                            android:padding="16dp"
+                            android:scaleType="centerInside"
+                            android:src="@drawable/ic_man"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@id/ampersand"
+                            app:layout_constraintTop_toTopOf="parent" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <!-- Вместе: сколько времени -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:orientation="vertical"
+                        android:paddingTop="8dp"
+                        android:paddingBottom="4dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="sans-serif-medium"
+                            android:gravity="center"
+                            android:text="@string/together"
+                            android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"
+                            android:textColor="@color/colorOnSurface"
+                            android:textSize="18sp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:text="@string/together_for"
+                            android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
+                            android:textColor="@color/colorOnSurface"
+                            android:textSize="16sp" />
+                    </LinearLayout>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <!-- Секция: Достижения -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingTop="16dp"
+                android:paddingBottom="16dp">
+
+                <!-- Первая строка: Заголовок и кнопка "Смотреть все" -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/section_title_tasks_header"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/achievements"
+                        android:textAppearance="?attr/textAppearanceTitleMedium"
+                        android:textColor="?attr/colorOnSurface" />
+
+                    <TextView
+                        android:id="@+id/see_all_button"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="?attr/selectableItemBackground"
+                        android:clickable="true"
+                        android:contentDescription="@string/see_all"
+                        android:drawablePadding="0dp"
+                        android:focusable="true"
+                        android:padding="4dp"
+                        android:gravity="center_vertical"
+                        android:text="@string/see_all"
+                        android:textAppearance="?attr/textAppearanceTitleSmall"
+                        android:textColor="?attr/colorOnSurface"
+                        app:drawableEndCompat="@drawable/ic_right" />
+                </LinearLayout>
+
+                <!-- Вторая строка: Список иконок-достижений
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/achievements_recycler"
+                    android:layout_width="match_parent"
+                    android:layout_height="64dp"
+                    android:orientation="horizontal"
+                    android:overScrollMode="never"
+                    android:clipToPadding="false"
+                    android:paddingStart="4dp"
+                    android:paddingEnd="4dp"/>
+                -->
+
+                <LinearLayout
+                    android:id="@+id/layout_achievements"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:paddingTop="8dp">
+
+                    <ImageButton
+                        android:id="@+id/achievement_1"
+                        android:layout_width="48dp"
+                        android:layout_height="48dp"
+                        android:layout_marginEnd="24dp"
+                        android:background="@drawable/circle_background"
+                        android:backgroundTint="@color/purple_mild"
+                        android:contentDescription="@string/cd_mood_terrible"
+                        android:scaleType="centerInside"
+                        app:srcCompat="@drawable/ic_awful" />
+
+                    <ImageButton
+                        android:id="@+id/achievement_2"
+                        android:layout_width="48dp"
+                        android:layout_height="48dp"
+                        android:layout_marginEnd="24dp"
+                        android:background="@drawable/circle_background"
+                        android:backgroundTint="@color/red_mild"
+                        android:contentDescription="@string/cd_mood_bad"
+                        android:scaleType="centerInside"
+                        app:srcCompat="@drawable/ic_sad" />
+
+                    <ImageButton
+                        android:id="@+id/achievement_3"
+                        android:layout_width="48dp"
+                        android:layout_height="48dp"
+                        android:layout_marginEnd="24dp"
+                        android:background="@drawable/circle_background"
+                        android:backgroundTint="@color/yellow_mild"
+                        android:contentDescription="@string/cd_mood_ok"
+                        android:scaleType="centerInside"
+                        app:srcCompat="@drawable/ic_ok" />
+
+                    <ImageButton
+                        android:id="@+id/achievement_4"
+                        android:layout_width="48dp"
+                        android:layout_height="48dp"
+                        android:layout_marginEnd="24dp"
+                        android:background="@drawable/circle_background"
+                        android:backgroundTint="@color/green_mild"
+                        android:contentDescription="@string/cd_mood_good"
+                        android:scaleType="centerInside"
+                        app:srcCompat="@drawable/ic_happy" />
+
+                    <ImageButton
+                        android:id="@+id/achievement_5"
+                        android:layout_width="48dp"
+                        android:layout_height="48dp"
+                        android:background="@drawable/circle_background"
+                        android:backgroundTint="@color/blue_mild"
+                        android:contentDescription="@string/cd_mood_great"
+                        android:scaleType="centerInside"
+                        app:srcCompat="@drawable/ic_great" />
+                </LinearLayout>
+            </LinearLayout>
+
+
+            <!-- Секция: Важные даты -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingTop="16dp"
+                android:paddingBottom="16dp">
+
+                <!-- Первая строка: Заголовок и кнопка "Поделиться" -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/section_title_activity"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/your_activity"
+                        android:textAppearance="?attr/textAppearanceTitleMedium"
+                        android:textColor="?attr/colorOnSurface" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/activity_share"
+                        style="@style/Widget.MaterialComponents.Button.TextButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginStart="8dp"
+                        android:backgroundTint="@android:color/transparent"
+                        android:insetLeft="0dp"
+                        android:insetTop="0dp"
+                        android:insetRight="0dp"
+                        android:insetBottom="0dp"
+                        android:minWidth="0dp"
+                        android:minHeight="0dp"
+                        android:padding="4dp"
+                        android:text="@string/share"
+                        android:textAppearance="?attr/textAppearanceLabelLarge"
+                        android:textColor="?attr/colorOnSurface"
+                        app:icon="@drawable/ic_share"
+                        app:iconGravity="textEnd"
+                        app:iconPadding="8dp" />
+                </LinearLayout>
+
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="8dp"
+                    app:cardCornerRadius="16dp"
+                    app:cardElevation="2dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="16dp">
+
+                        <!-- Верхняя строка: иконки и подписи карточек -->
+                        <TableRow
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <!-- Пустая ячейка для аватарки -->
+                            <Space
+                                android:layout_width="40dp"
+                                android:layout_height="24dp" />
+
+                            <!-- Карточка 1: иконка и подпись -->
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="4dp"
+                                android:layout_weight="1"
+                                android:gravity="center_horizontal"
+                                android:orientation="vertical">
+
+                                <ImageView
+                                    android:layout_width="24dp"
+                                    android:layout_height="24dp"
+                                    android:layout_marginBottom="4dp"
+                                    android:contentDescription="@string/modules_done"
+                                    android:src="@drawable/ic_modules_done"
+                                    app:tint="?attr/colorOnSurfaceVariant" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="center"
+                                    android:text="@string/modules_done"
+                                    android:textAppearance="?attr/textAppearanceBodyMedium"
+                                    android:textColor="?attr/colorOnSurface" />
+                            </LinearLayout>
+
+                            <!-- Карточка 2: иконка и подпись -->
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:gravity="center_horizontal"
+                                android:orientation="vertical">
+
+                                <ImageView
+                                    android:layout_width="24dp"
+                                    android:layout_height="24dp"
+                                    android:layout_marginBottom="4dp"
+                                    android:contentDescription="@string/tasks_done"
+                                    android:src="@drawable/ic_talked"
+                                    app:tint="?attr/colorOnSurfaceVariant" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="center"
+                                    android:text="@string/tasks_done"
+                                    android:textAppearance="?attr/textAppearanceBodyMedium"
+                                    android:textColor="?attr/colorOnSurface" />
+                            </LinearLayout>
+
+                            <!-- Карточка 3: иконка и подпись -->
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:gravity="center_horizontal"
+                                android:orientation="vertical">
+
+                                <ImageView
+                                    android:layout_width="24dp"
+                                    android:layout_height="24dp"
+                                    android:layout_marginBottom="4dp"
+                                    android:contentDescription="@string/cur_streak"
+                                    android:src="@drawable/ic_fire2"
+                                    app:tint="?attr/colorOnSurfaceVariant" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="center"
+                                    android:text="@string/cur_streak"
+                                    android:textAppearance="?attr/textAppearanceBodyMedium"
+                                    android:textColor="?attr/colorOnSurface" />
+                            </LinearLayout>
+                        </TableRow>
+
+                        <!-- Первая строка: первая аватарка и цветные результаты -->
+                        <TableRow
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp">
+
+                            <ImageView
+                                android:id="@+id/activity_avatar1"
+                                android:layout_width="40dp"
+                                android:layout_height="40dp"
+                                android:layout_gravity="center"
+                                android:background="@drawable/circle_background"
+                                android:contentDescription="@string/user_pic"
+                                android:padding="4dp"
+                                android:scaleType="centerCrop"
+                                android:src="@drawable/ic_woman" />
+
+                            <TextView
+                                android:id="@+id/activity_conversations"
+                                android:layout_width="0dp"
+                                android:layout_height="40dp"
+                                android:layout_marginStart="4dp"
+                                android:layout_weight="1"
+                                android:background="@drawable/bg_stat_purple"
+                                android:gravity="center"
+                                android:padding="4dp"
+                                android:text="3"
+                                android:textAppearance="?attr/textAppearanceTitleMedium"
+                                android:textColor="@color/colorOnSurface" />
+
+                            <TextView
+                                android:id="@+id/activity_streak"
+                                android:layout_width="0dp"
+                                android:layout_height="40dp"
+                                android:layout_weight="1"
+                                android:background="@drawable/bg_stat_purple"
+                                android:gravity="center"
+                                android:padding="4dp"
+                                android:text="@string/dash"
+                                android:textAppearance="?attr/textAppearanceTitleMedium"
+                                android:textColor="@color/colorOnSurface" />
+
+                            <TextView
+                                android:id="@+id/activity_games"
+                                android:layout_width="0dp"
+                                android:layout_height="40dp"
+                                android:layout_weight="1"
+                                android:background="@drawable/bg_stat_purple"
+                                android:gravity="center"
+                                android:padding="4dp"
+                                android:text="@string/dash"
+                                android:textAppearance="?attr/textAppearanceTitleMedium"
+                                android:textColor="@color/colorOnSurface" />
+                        </TableRow>
+
+                        <!-- Вторая строка: вторая аватарка и цветные прочерки -->
+                        <TableRow
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp">
+
+                            <ImageView
+                                android:id="@+id/activity_avatar2"
+                                android:layout_width="40dp"
+                                android:layout_height="40dp"
+                                android:layout_gravity="center"
+                                android:background="@drawable/circle_background"
+                                android:contentDescription="@string/user_pic"
+                                android:padding="4dp"
+                                android:scaleType="centerCrop"
+                                android:src="@drawable/ic_man" />
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="40dp"
+                                android:layout_marginStart="4dp"
+                                android:layout_weight="1"
+                                android:background="@drawable/bg_stat_red"
+                                android:gravity="center"
+                                android:padding="4dp"
+                                android:text="@string/dash"
+                                android:textAppearance="?attr/textAppearanceBodyMedium"
+                                android:textColor="@color/colorOnSurface" />
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="40dp"
+                                android:layout_weight="1"
+                                android:background="@drawable/bg_stat_red"
+                                android:gravity="center"
+                                android:padding="4dp"
+                                android:text="@string/dash"
+                                android:textAppearance="?attr/textAppearanceBodyMedium"
+                                android:textColor="@color/colorOnSurface" />
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="40dp"
+                                android:layout_weight="1"
+                                android:background="@drawable/bg_stat_red"
+                                android:gravity="center"
+                                android:padding="4dp"
+                                android:text="@string/dash"
+                                android:textAppearance="?attr/textAppearanceBodyMedium"
+                                android:textColor="@color/colorOnSurface" />
+                        </TableRow>
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
+            </LinearLayout>
+
+            <!-- Секция: Важные даты -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingTop="16dp"
+                android:paddingBottom="16dp">
+
+                <!-- Первая строка: Заголовок-->
+                <TextView
+                    android:id="@+id/section_title_dates"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/special_dates"
+                    android:textAppearance="?attr/textAppearanceTitleMedium"
+                    android:textColor="?attr/colorOnSurface"
+                    android:layout_marginBottom="8dp"/>
+
+                <!-- Важная дата (Карточка) -->
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/date_1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="8dp"
+                    app:cardCornerRadius="12dp"
+                    app:cardElevation="2dp">
+
+                <!-- Используем ConstraintLayout для правильного позиционирования -->
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"> <!-- Этот ConstraintLayout будет оборачивать контент -->
+
+                <!-- Цветная полоска (привязана к высоте родительского ConstraintLayout) -->
+                <View
+                    android:id="@+id/color_bar"
+                    android:layout_width="6dp"
+                    android:layout_height="0dp"
+                    android:background="@color/green_mild"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"/>
+
+                <!-- FrameLayout (содержит Основной контент и Кнопку редактирования) -->
+                <FrameLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/color_bar"
+                    app:layout_constraintEnd_toEndOf="parent">
+
+                <!-- Основной горизонтальный контент (LinearLayout остается прежним) -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:paddingStart="16dp"
+                    android:paddingEnd="48dp">
+
+                <!-- Квадрат с датой слева (TextView остается прежним) -->
+                <TextView
+                    android:id="@+id/date_square"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="0dp"
+                    android:background="@drawable/bg_rounded_coloured"
+                    android:layout_marginEnd="16dp"
+                    android:gravity="center"
+                    android:minWidth="56dp"
+                    android:minHeight="56dp"
+                    android:text="@string/date_date"
+                    android:textAlignment="center"
+                    android:textColor="@android:color/white"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <!-- Контент и дата (LinearLayout остается прежним) -->
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:padding="16dp">
+
+                    <TextView
+                        android:id="@+id/date_title_1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="4dp"
+                        android:text="@string/marriage_date"
+                        android:textAppearance="?attr/textAppearanceTitleSmall"
+                        android:textColor="?attr/colorOnSurface" />
+
+                    <!-- Когда: через сколько времени -->
+                    <TextView
+                        android:id="@+id/text_tasks_status"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:background="@drawable/bg_rounded_coloured"
+                        android:paddingStart="12dp"
+                        android:paddingTop="4dp"
+                        android:paddingEnd="12dp"
+                        android:paddingBottom="4dp"
+                        android:text="@string/in_9"
+                        android:textAppearance="?attr/textAppearanceBodyMedium"
+                        android:textColor="@android:color/white" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <!-- Кнопка редактирования в правом верхнем углу (ImageButton остается прежним) -->
+            <ImageButton
+                android:id="@+id/button_edit_date"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_gravity="top|end"
+                android:layout_margin="8dp"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:contentDescription="@string/edit"
+                android:padding="8dp"
+                android:src="@drawable/ic_edit"
+                app:tint="?attr/colorOnSurface" />
+
+        </FrameLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+<com.google.android.material.button.MaterialButton
+    android:id="@+id/button_add_date"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:layout_marginTop="8dp"
+    android:text="@string/add_spec_date"
+    android:textAppearance="?attr/textAppearanceLabelLarge"
+    app:backgroundTint="@color/purple_mild" />
+
+    </LinearLayout>
+
+
+            <!-- Дополнительное пространство в конце для прокрутки над bottom nav -->
+            <!-- Высоту лучше привязать к реальной высоте BottomNavigationView или использовать fitSystemWindows -->
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="80dp" />
+        </LinearLayout>
+    </ScrollView>
+
+    <!-- Контейнер для нижней навигации -->
+    <FrameLayout
+        android:id="@+id/bottomNavContainer"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="?attr/colorSurface"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <include layout="@layout/layout_bottom_nav" />
+    </FrameLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

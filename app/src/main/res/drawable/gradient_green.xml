@@ -1,0 +1,8 @@
+<!-- res/drawable/gradient_ocean.xml -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <gradient
+        android:angle="-50"
+        android:startColor="@color/green_mild"
+        android:endColor="@color/accent_3"
+        android:type="linear"/>
+</shape>

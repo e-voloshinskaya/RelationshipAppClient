@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Тема приложения -->
+    <style name="Theme.MyApp" parent="Theme.Material3.DynamicColors.DayNight">
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorOnPrimary">@color/colorOnPrimary</item>
+        <item name="android:colorBackground">@color/colorBackground</item>
+        <item name="android:textColor">@color/colorOnBackground</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:windowLightStatusBar">false</item>
+    </style>
+    <!-- Bottom Navigation -->
+    <style name="Widget.MyApp.BottomNav" parent="Widget.Material3.BottomNavigationView">
+        <item name="labelVisibilityMode">labeled</item>
+        <item name="itemIconTint">@color/selector_bottom_nav</item>
+        <item name="itemTextColor">@color/selector_bottom_nav</item>
+    </style>
+
+    <!-- Заголовки текста -->
+    <style name="Text">
+    </style>
+
+    <style name="Text.Head">
+        <item name="android:textSize">32sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/colorOnBackground</item>
+    </style>
+
+    <style name="Text.Subtitle">
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/colorOnBackground</item>
+    </style>
+
+    <style name="Text.Section">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textAllCaps">true</item>
+        <item name="android:textColor">@color/colorOnBackground</item>
+    </style>
+
+    <style name="Text.Timeline">
+        <item name="android:textSize">18sp</item>
+        <item name="android:textColor">@color/colorOnBackground</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <!-- Карточка с цветом -->
+    <style name="Widget.MyApp.ColoredCard" parent="Widget.Material3.CardView.Filled">
+        <item name="cardUseCompatPadding">true</item>
+        <item name="cardCornerRadius">12dp</item>
+        <!-- Подменяем цвет программно или через attr -->
+        <item name="cardBackgroundColor">@color/cardBlue</item>
+    </style>
+
+    <style name="AppButton" parent="Widget.MaterialComponents.Button">
+        <item name="android:textColor">@color/white</item>
+        <item name="cornerRadius">24dp</item>
+        <item name="android:paddingStart">16dp</item>
+        <item name="android:paddingEnd">16dp</item>
+        <item name="elevation">2dp</item>
+    </style>
+
+    <style name="AppTextButton" parent="Widget.MaterialComponents.Button.TextButton">
+        <item name="android:textAllCaps">true</item>
+        <item name="android:letterSpacing">0.05</item>
+    </style>
+
+</resources>

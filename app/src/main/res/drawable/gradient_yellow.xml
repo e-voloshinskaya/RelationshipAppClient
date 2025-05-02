@@ -1,0 +1,8 @@
+<!-- res/drawable/gradient_sunset.xml -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <gradient
+        android:angle="0"
+        android:startColor="@color/yellow_mild"
+        android:endColor="@color/sand_light"
+        android:type="linear"/>
+</shape>

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Выбранный элемент - используем цвет из темы (colorPrimary или colorSecondary) -->
+    <item android:state_checked="true" android:color="?attr/colorPrimary" />
+    <!-- Не выбранный элемент - используем приглушенный цвет из темы -->
+    <item android:color="?attr/colorOnSurfaceVariant" android:alpha="0.6"/>
+</selector>

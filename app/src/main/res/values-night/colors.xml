@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#D0BCFF</color>
+    <color name="colorOnPrimary">#381E72</color>
+    <color name="colorPrimaryContainer">#4F378B</color>
+    <color name="colorOnPrimaryContainer">#EADDFF</color>
+
+    <color name="colorBackground">#0F111F</color>
+    <color name="colorOnBackground">#FFFFFF</color>
+
+    <color name="colorOnCard">#FFFFFF</color>
+    <color name="colorSurface">#1A1C2B</color>
+    <color name="colorOnSurface">#FFFFFF</color>
+    <color name="colorOutline">#5B5B71</color>
+
+    <color name="cardBlue">#1565C0</color>
+    <color name="cardYellow">#F9A825</color>
+    <color name="cardCyan">#00838F</color>
+    <color name="cardGreen">#2E7D32</color>
+</resources>
