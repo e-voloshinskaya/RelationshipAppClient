@@ -38,7 +38,6 @@ android {
 dependencies {
     implementation(libs.androidx.activity.ktx)
     implementation(libs.androidx.fragment.ktx)
-    implementation (libs.androidx.appcompat.v161)
     // Material 3
     implementation (libs.material)
     // ConstraintLayout и другие layout компоненты
