@@ -9,7 +9,7 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 
 
-class InsightsFragment : Fragment() {
+class HistoryFragment : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater,

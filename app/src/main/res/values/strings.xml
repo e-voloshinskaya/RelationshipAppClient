@@ -62,10 +62,19 @@
     <string name="cur_streak">Текущая серия дней</string>
     <string name="edit">Изменить информацию о важной дате</string>
     <string name="dash">-</string>
+
+    <!-- ── History screen ────────────────────────── -->
+
     <string name="screen_title_observe">Изучение</string>
     <string name="notes">Заметки</string>
 
-    <!-- ── Home screen ────────────────────────── -->
+
+    <string name="screen_title_history">История</string>
+    <string name="bookmarks">Закладки</string>
+    <string name="section_title_history_list">История прохождения упражнений по датам</string>
+    <string name="cd_completion_status_user2">Статус прохождения юзером2</string>
+    <string name="cd_completion_status_user1">Статус прохождения упражнения юзером1</string>
+    <string name="cd_delete_history_entry">Кнопка удаления записи о прохождении упражнения</string>
 
 
 </resources>

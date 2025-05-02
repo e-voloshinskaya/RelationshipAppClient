@@ -16,7 +16,7 @@
 
     <fragment
         android:id="@+id/insightsFragment"
-        android:name="com.example.myapplication.ui.InsightsFragment"
+        android:name="com.example.myapplication.ui.HistoryFragment"
         android:label="Insights" />
 
     <fragment

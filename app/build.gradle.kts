@@ -41,7 +41,9 @@ dependencies {
     // Material 3
     implementation (libs.material)
     // ConstraintLayout и другие layout компоненты
-    implementation(libs.androidx.constraintlayout)  // Оставьте одну версию
+    implementation(libs.androidx.constraintlayout)
+    implementation (libs.androidx.swiperefreshlayout)
+    implementation (libs.androidx.recyclerview)
 
     // Navigation Component
     implementation(libs.androidx.navigation.fragment.ktx)
