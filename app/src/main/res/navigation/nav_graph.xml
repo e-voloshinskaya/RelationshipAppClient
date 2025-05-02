@@ -15,9 +15,9 @@
         android:label="Explore" />
 
     <fragment
-        android:id="@+id/insightsFragment"
+        android:id="@+id/historyFragment"
         android:name="com.example.myapplication.ui.HistoryFragment"
-        android:label="Insights" />
+        android:label="History" />
 
     <fragment
         android:id="@+id/profileFragment"

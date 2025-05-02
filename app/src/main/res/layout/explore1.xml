@@ -1,4 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+<!--
+<?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -6,7 +13,7 @@
     android:layout_height="match_parent"
     android:background="?attr/colorSurface">
 
-    <!-- 1) Заголовок экрана -->
+    &lt;!&ndash; 1) Заголовок экрана &ndash;&gt;
     <TextView
         android:id="@+id/explore_title"
         android:layout_width="0dp"
@@ -19,7 +26,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
 
-    <!-- 2) Контент прокручивается под заголовком -->
+    &lt;!&ndash; 2) Контент прокручивается под заголовком &ndash;&gt;
     <ScrollView
         android:id="@+id/scrollView"
         android:layout_width="0dp"
@@ -40,8 +47,8 @@
             android:paddingEnd="16dp"
             android:clipToPadding="false">
 
-            <!-- 1) Раздел "Учитесь" -->
-            <!-- без подзаголовка, одна большая карточка посередине -->
+            &lt;!&ndash; 1) Раздел "Учитесь" &ndash;&gt;
+            &lt;!&ndash; без подзаголовка, одна большая карточка посередине &ndash;&gt;
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/card_learn"
                 android:layout_width="match_parent"
@@ -74,7 +81,7 @@
             </com.google.android.material.card.MaterialCardView>
 
 
-            <!-- 2) Раздел "Практикуйтесь" -->
+            &lt;!&ndash; 2) Раздел "Практикуйтесь" &ndash;&gt;
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -103,7 +110,7 @@
                     android:focusable="true"/>
             </LinearLayout>
 
-            <!-- Сетка 2×2 цветных карточек -->
+            &lt;!&ndash; Сетка 2×2 цветных карточек &ndash;&gt;
             <GridLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -115,7 +122,7 @@
                 android:useDefaultMargins="true"
                 android:layout_marginTop="8dp">
 
-                <!-- Card A -->
+                &lt;!&ndash; Card A &ndash;&gt;
                 <com.google.android.material.card.MaterialCardView
                     android:layout_width="0dp"
                     android:layout_height="120dp"
@@ -145,7 +152,7 @@
                     </FrameLayout>
                 </com.google.android.material.card.MaterialCardView>
 
-                <!-- Card B -->
+                &lt;!&ndash; Card B &ndash;&gt;
                 <com.google.android.material.card.MaterialCardView
                     android:layout_width="0dp"
                     android:layout_height="120dp"
@@ -175,7 +182,7 @@
                     </FrameLayout>
                 </com.google.android.material.card.MaterialCardView>
 
-                <!-- Card C -->
+                &lt;!&ndash; Card C &ndash;&gt;
                 <com.google.android.material.card.MaterialCardView
                     android:layout_width="0dp"
                     android:layout_height="120dp"
@@ -205,7 +212,7 @@
                     </FrameLayout>
                 </com.google.android.material.card.MaterialCardView>
 
-                <!-- Card D -->
+                &lt;!&ndash; Card D &ndash;&gt;
                 <com.google.android.material.card.MaterialCardView
                     android:layout_width="0dp"
                     android:layout_height="120dp"
@@ -238,7 +245,7 @@
             </GridLayout>
 
 
-            <!-- 3) Раздел "Карта любви" -->
+            &lt;!&ndash; 3) Раздел "Карта любви" &ndash;&gt;
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -255,19 +262,19 @@
                 app:cardElevation="4dp"
                 app:cardBackgroundColor="@color/cardYellow">
 
-                <!-- Здесь можно нарисовать map + сердца -->
+                &lt;!&ndash; Здесь можно нарисовать map + сердца &ndash;&gt;
                 <FrameLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
 
-                    <!-- фоновая карта -->
+                    &lt;!&ndash; фоновая карта &ndash;&gt;
                     <ImageView
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:src="@drawable/ic_map"
                         android:tint="#40FFFFFF"/>
 
-                    <!-- декоративные сердца -->
+                    &lt;!&ndash; декоративные сердца &ndash;&gt;
                     <ImageView
                         android:layout_width="32dp"
                         android:layout_height="32dp"
@@ -279,7 +286,7 @@
             </com.google.android.material.card.MaterialCardView>
 
 
-            <!-- 4) Раздел "Банковский счёт эмоций" -->
+            &lt;!&ndash; 4) Раздел "Банковский счёт эмоций" &ndash;&gt;
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -309,7 +316,7 @@
                         android:textAppearance="?attr/textAppearanceBodyLarge"
                         android:textColor="@android:color/white"/>
 
-                    <!-- Здесь в будущем — график/бареры эмоций -->
+                    &lt;!&ndash; Здесь в будущем — график/бареры эмоций &ndash;&gt;
                     <ProgressBar
                         style="?android:attr/progressBarStyleHorizontal"
                         android:layout_width="match_parent"
@@ -321,7 +328,7 @@
             </com.google.android.material.card.MaterialCardView>
 
 
-            <!-- Отступ внизу под bottom nav -->
+            &lt;!&ndash; Отступ внизу под bottom nav &ndash;&gt;
             <View
                 android:layout_width="match_parent"
                 android:layout_height="80dp"/>
@@ -329,7 +336,7 @@
         </LinearLayout>
     </ScrollView>
 
-    <!-- Нижняя навигация -->
+    &lt;!&ndash; Нижняя навигация &ndash;&gt;
     <FrameLayout
         android:id="@+id/bottomNavContainer"
         android:layout_width="0dp"
@@ -341,4 +348,4 @@
         <include layout="@layout/layout_bottom_nav"/>
     </FrameLayout>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>-->

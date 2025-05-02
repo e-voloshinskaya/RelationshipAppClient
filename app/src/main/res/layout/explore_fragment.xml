@@ -30,7 +30,6 @@
             android:text="Изучение"
             android:textAppearance="?attr/textAppearanceHeadlineSmall"
             android:textColor="?attr/colorOnSurface"
-            android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -58,8 +57,8 @@
             android:paddingStart="16dp"
             android:paddingEnd="16dp"
             android:paddingTop="80dp"
-        android:paddingBottom="16dp"
-        android:clipToPadding="false" >
+            android:paddingBottom="16dp"
+            android:clipToPadding="false" >
 
         <!-- 1) Секция: Учитесь (одна большая карточка) -->
         <TextView

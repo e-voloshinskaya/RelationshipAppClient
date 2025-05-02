@@ -9,6 +9,7 @@
 
     <color name="gradient_lavender_start">#9575CD</color>
     <color name="gradient_lavender_end">#D1C4E9</color>
+    <color name="lavender_dark">#7E57C2</color>
 
     <!-- Общие -->
     <color name="colorPrimary">#6750A4</color>
@@ -23,12 +24,6 @@
     <color name="colorOnSurface">#1C1B1F</color>
     <color name="colorOutline">#79747E</color>
 
-    <!-- Карточки -->
-    <color name="cardBlue">#1E88E5</color>
-    <color name="cardYellow">#FFCA28</color>
-    <color name="cardCyan">#26C6DA</color>
-    <color name="cardGreen">#43A047</color>
-
     <!-- Цвета для вертикальных полос -->
     <color name="red_mild">#FF8A65</color> <!-- Мягкий коралловый -->
     <color name="blue_mild">#4DB6AC</color> <!-- Тёплая бирюза -->
@@ -41,7 +36,12 @@
     <color name="accent_1">#FF7043</color> <!-- Яркий коралл -->
     <color name="accent_2">#26A69A</color> <!-- Глубокая бирюза -->
     <color name="accent_3">#AED581</color> <!-- Светло-зелёный -->
-    <?xml version="1.0" encoding="utf-8"?>
+
+    <!-- Карточки -->
+    <color name="cardBlue">#1E88E5</color>
+    <color name="cardYellow">#FFCA28</color>
+    <color name="cardCyan">#26C6DA</color>
+    <color name="cardGreen">#43A047</color>
 
         <!-- Дополнительные цвета -->
         <!-- Коралловая гамма -->
@@ -66,10 +66,10 @@
 
         <!-- Лавандовая гамма -->
         <color name="lavender_light">#B39DDB</color>
-        <color name="lavender_dark">#7E57C2</color>
+        <!-- <color name="lavender_dark">#7E57C2</color>  -->
         <color name="lavender_pastel">#D1C4E9</color>
 
-        <!-- Голубая гамма -->
+    <!-- Голубая гамма -->
         <color name="blue_light">#90CAF9</color>
         <color name="blue_dark">#42A5F5</color>
         <color name="blue_pastel">#BBDEFB</color>
