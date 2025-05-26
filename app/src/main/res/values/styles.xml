@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- Тема приложения -->
-    <style name="Theme.MyApp" parent="Theme.Material3.DynamicColors.DayNight">
+    <!-- Тема приложения <item name="android:windowLightStatusBar">false</item> -->
+    <style name="Theme.MyApp" parent="Theme.Material3.DynamicColors.DayNight.NoActionBar">
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorOnPrimary">@color/colorOnPrimary</item>
         <item name="android:colorBackground">@color/colorBackground</item>
         <item name="android:textColor">@color/colorOnBackground</item>
-        <item name="android:statusBarColor">@android:color/transparent</item>
-        <item name="android:windowLightStatusBar">false</item>
+        <item name="android:statusBarColor">@color/black</item>
+        <item name="android:windowLightStatusBar">true</item> <!-- для светлого текста -->
     </style>
     <!-- Bottom Navigation -->
     <style name="Widget.MyApp.BottomNav" parent="Widget.Material3.BottomNavigationView">

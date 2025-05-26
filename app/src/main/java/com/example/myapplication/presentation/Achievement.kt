@@ -1,4 +1,4 @@
-package com.example.myapplication
+package com.example.myapplication.presentation
 
 data class Achievement(
     val iconResId: Int,   // R.drawable.ic_...

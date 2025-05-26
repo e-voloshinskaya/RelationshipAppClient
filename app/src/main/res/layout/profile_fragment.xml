@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:fitsSystemWindows="true"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="?attr/colorSurface"
-    tools:context="com.example.myapplication.ui.HomeFragment">
+    tools:context="com.example.myapplication.presentation.ui.TodayFragment">
 
     <!-- Заголовок экрана и иконка уведомлений -->
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -16,8 +18,8 @@
         android:elevation="8dp"
         android:paddingStart="16dp"
         android:paddingEnd="16dp"
-        android:paddingTop="8dp"
-        android:paddingBottom="8dp"
+        android:paddingTop="4dp"
+        android:paddingBottom="16dp"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
@@ -37,6 +39,9 @@
 
         <ImageView
             android:id="@+id/icon_notifications"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:clickable="true"
+            android:focusable="true"
             android:layout_width="30dp"
             android:layout_height="36dp"
             android:contentDescription="@string/settings"
@@ -45,6 +50,18 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:tint="?attr/colorOnSurfaceVariant" />
+        <!--
+        <ImageButton
+            android:id="@+id/icon_notifications2"
+            android:layout_width="30dp"
+            android:layout_height="36dp"
+            android:layout_gravity="top|end"
+            android:layout_margin="8dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="@string/settings"android:padding="8dp"
+            android:src="@drawable/ic_edit"
+            app:tint="?attr/colorOnSurface" /> -->
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 
@@ -54,7 +71,7 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:fillViewport="true"
-        app:layout_constraintBottom_toTopOf="@+id/bottomNavContainer"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -200,11 +217,11 @@
                         android:id="@+id/see_all_button"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:background="?attr/selectableItemBackground"
+                        android:background="?attr/selectableItemBackgroundBorderless"
                         android:clickable="true"
+                        android:focusable="true"
                         android:contentDescription="@string/see_all"
                         android:drawablePadding="0dp"
-                        android:focusable="true"
                         android:padding="4dp"
                         android:gravity="center_vertical"
                         android:text="@string/see_all"
@@ -233,7 +250,7 @@
                     android:orientation="horizontal"
                     android:paddingTop="8dp">
 
-                    <ImageButton
+                    <ImageView
                         android:id="@+id/achievement_1"
                         android:layout_width="48dp"
                         android:layout_height="48dp"
@@ -244,7 +261,7 @@
                         android:scaleType="centerInside"
                         app:srcCompat="@drawable/ic_awful" />
 
-                    <ImageButton
+                    <ImageView
                         android:id="@+id/achievement_2"
                         android:layout_width="48dp"
                         android:layout_height="48dp"
@@ -255,7 +272,7 @@
                         android:scaleType="centerInside"
                         app:srcCompat="@drawable/ic_sad" />
 
-                    <ImageButton
+                    <ImageView
                         android:id="@+id/achievement_3"
                         android:layout_width="48dp"
                         android:layout_height="48dp"
@@ -266,7 +283,7 @@
                         android:scaleType="centerInside"
                         app:srcCompat="@drawable/ic_ok" />
 
-                    <ImageButton
+                    <ImageView
                         android:id="@+id/achievement_4"
                         android:layout_width="48dp"
                         android:layout_height="48dp"
@@ -277,7 +294,7 @@
                         android:scaleType="centerInside"
                         app:srcCompat="@drawable/ic_happy" />
 
-                    <ImageButton
+                    <ImageView
                         android:id="@+id/achievement_5"
                         android:layout_width="48dp"
                         android:layout_height="48dp"
@@ -314,6 +331,7 @@
                         android:textAppearance="?attr/textAppearanceTitleMedium"
                         android:textColor="?attr/colorOnSurface" />
 
+                    <!--
                     <com.google.android.material.button.MaterialButton
                         android:id="@+id/activity_share"
                         style="@style/Widget.MaterialComponents.Button.TextButton"
@@ -335,6 +353,23 @@
                         app:icon="@drawable/ic_share"
                         app:iconGravity="textEnd"
                         app:iconPadding="8dp" />
+                    -->
+                    <TextView
+                        android:id="@+id/activity_share"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:background="?attr/selectableItemBackgroundBorderless"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:contentDescription="@string/share"
+                        android:drawablePadding="6dp"
+                        app:drawableEndCompat="@drawable/ic_share_18"
+                        android:padding="4dp"
+                        android:text="@string/share"
+                        android:textAppearance="?attr/textAppearanceTitleSmall"
+                        android:textColor="?attr/colorOnSurface"/>
+
                 </LinearLayout>
 
                 <com.google.android.material.card.MaterialCardView
@@ -698,7 +733,7 @@
         </LinearLayout>
     </ScrollView>
 
-    <!-- Контейнер для нижней навигации -->
+    <!-- Контейнер для нижней навигации
     <FrameLayout
         android:id="@+id/bottomNavContainer"
         android:layout_width="0dp"
@@ -709,6 +744,6 @@
         app:layout_constraintStart_toStartOf="parent">
 
         <include layout="@layout/layout_bottom_nav" />
-    </FrameLayout>
+    </FrameLayout>  -->
 
 </androidx.constraintlayout.widget.ConstraintLayout>

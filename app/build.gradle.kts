@@ -1,6 +1,12 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
+
+    // for Supabase
+    kotlin("plugin.serialization") version "2.0.0"
+
+    // for Google services
+    id("com.google.gms.google-services")
 }
 
 android {
@@ -56,4 +62,18 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
+
+    // Supabase
+    implementation(platform(libs.bom))
+    implementation(libs.postgrest.kt)
+    implementation(libs.auth.kt)
+    implementation(libs.realtime.kt)
+    implementation(libs.storage.kt)
+    implementation(libs.functions.kt)
+    implementation(libs.ktor.client.android)
+
+    // Firebase Google
+    implementation(platform(libs.firebase.bom))
+    implementation(libs.firebase.messaging)
+    implementation(libs.firebase.analytics)
 }

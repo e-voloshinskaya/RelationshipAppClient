@@ -22,7 +22,7 @@
             android:id="@+id/colorStripe"
             android:layout_width="6dp"
             android:layout_height="match_parent"
-            tools:background="@color/purple_mild" />
+            tools:background="@color/green_mild" />
 
         <!-- Основной контент с использованием ConstraintLayout -->
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -45,7 +45,7 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/text_history_item_datetime"
                 android:layout_marginEnd="8dp"
-                tools:text="Практика" />
+                tools:text="Тест" />
 
             <!-- Дата и Время -->
             <TextView
@@ -57,7 +57,7 @@
                 android:textColor="?attr/colorOnSurfaceVariant"
                 app:layout_constraintEnd_toStartOf="@id/button_delete_history_item"
                 app:layout_constraintTop_toTopOf="parent"
-                tools:text="5 мая 2025, 12:30" />
+                tools:text="4 февраля 2025, 20:15" />
 
             <!-- Кнопка удаления -->
             <ImageButton
@@ -83,7 +83,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/text_history_item_subtype"
                 app:layout_constraintEnd_toStartOf="@id/checkmarks_container"
-                tools:text="Упражнение на доверие" />
+                tools:text="Проверка отношений" />
 
             <!-- Остальной код остается тем же, меняем только контейнер с галочками -->
 

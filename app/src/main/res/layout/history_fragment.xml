@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="?attr/colorSurface"
-    tools:context="com.example.myapplication.ui.HistoryFragment">
+    tools:context="com.example.myapplication.presentation.ui.HistoryFragment">
 
     <!-- Заголовок поверх -->
     <androidx.constraintlayout.widget.ConstraintLayout

@@ -1,3 +1,22 @@
+package com.example.myapplication.presentation.ui
+
+import android.os.Bundle
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import androidx.fragment.app.Fragment
+import com.example.myapplication.R
+
+
+class ProfileFragment : Fragment() {
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
+    ): View? {
+        return inflater.inflate(R.layout.profile_fragment, container, false)
+    }
+}
+
+/*
 package com.example.myapplication.ui
 
 import android.os.Bundle
@@ -12,7 +31,7 @@ import com.example.myapplication.Achievement
 import com.example.myapplication.R
 
 
-class ProfileFragment : Fragment(R.layout.fragment_achievements) {
+class com.example.myapplication.ui.ProfileFragment : Fragment(R.layout.fragment_achievements) {
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -58,4 +77,4 @@ class ProfileFragment : Fragment(R.layout.fragment_achievements) {
             Toast.makeText(requireContext(), "Вы выбрали: ${achievement.name}", Toast.LENGTH_SHORT).show()
         }
     }
-}
+}*/
