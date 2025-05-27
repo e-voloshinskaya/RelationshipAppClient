@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="16dp"
+    android:layout_marginEnd="16dp"
+    android:layout_marginTop="12dp"
+    android:clickable="true"
+    android:focusable="true"
+    app:cardBackgroundColor="?attr/colorSurfaceContainerHigh"
+    app:cardCornerRadius="16dp"
+    app:cardElevation="2dp"
+    app:rippleColor="?attr/colorPrimaryContainer">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+    <!-- Цветовая полоса -->
+    <View
+        android:id="@+id/colorStripe"
+        android:layout_width="6dp"
+        android:layout_height="match_parent"
+        tools:background="@color/green_mild"
+        tools:visibility="visible"
+        />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp">
+
+        <!--
+        Иконка статуса модуля справа.
+        В коде ты будешь менять ее видимость и ресурс (src).
+        Например, показывать галочку (ic_check_circle) или иконку "в процессе" (ic_pending).
+        -->
+        <ImageView
+            android:id="@+id/image_module_status"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:contentDescription="@string/module_status_finished"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:tint="?attr/colorPrimary"
+            tools:src="@drawable/ic_check"
+            tools:visibility="gone"/>
+
+        <!-- Иконка "В процессе" (например, часы) -->
+        <!-- Она будет на том же месте, что и галочка. В коде управляем их видимостью. -->
+        <ImageView
+            android:id="@+id/image_module_in_progress"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:contentDescription="@string/module_status_in_progress"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:tint="@color/green_mild"
+            android:visibility="gone"
+            tools:src="@drawable/ic_check"
+            tools:visibility="visible"/>
+
+        <!-- Заголовок модуля
+        !!!!!!!!!!!!!!!app:layout_constraintEnd_toStartOf="@id/image_module_status"-->
+        <TextView
+            android:id="@+id/text_module_title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:textAppearance="?attr/textAppearanceTitleMedium"
+            android:textColor="?attr/colorOnSurface"
+            app:layout_constraintEnd_toStartOf="@id/image_module_in_progress"
+
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Основы взаимопонимания" />
+
+        <TextView
+            android:id="@+id/text_module_sections_count"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginStart="0dp"
+            android:textAppearance="?attr/textAppearanceLabelLarge"
+            android:textColor="?attr/colorOnSurfaceVariant"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/text_module_title"
+            tools:text="3 раздела" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+    </LinearLayout>
+</com.google.android.material.card.MaterialCardView>

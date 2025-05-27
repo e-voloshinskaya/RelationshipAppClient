@@ -60,16 +60,17 @@
                 tools:text="5 мая 2025, 12:30" />
 
             <!-- Кнопка удаления -->
-            <ImageButton
+            <com.google.android.material.button.MaterialButton
                 android:id="@+id/button_delete_history_item"
+                style="@style/Widget.App.Button.IconButton.Circular"
                 android:layout_width="24dp"
                 android:layout_height="24dp"
-                android:background="?attr/selectableItemBackgroundBorderless"
                 android:contentDescription="@string/cd_delete_history_entry"
-                android:src="@drawable/ic_delete"
+                app:icon="@drawable/ic_delete"
+                app:iconTint="?attr/colorOnSurfaceVariant"
+                app:iconSize="24dp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:tint="?attr/colorOnSurfaceVariant" />
+                app:layout_constraintTop_toTopOf="parent"/>
 
             <!-- Заголовок упражнения -->
             <TextView

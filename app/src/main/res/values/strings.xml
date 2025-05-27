@@ -9,7 +9,7 @@
     <string name="nav_history">История</string>
     <string name="nav_profile">Профиль</string>
 
-    <!-- ── Home screen ────────────────────────── -->
+    <!-- ── Today screen ────────────────────────── -->
     <string name="screen_title_today">Сегодня</string>
     <string name="notification">Уведомления</string>
 
@@ -50,31 +50,46 @@
     <string name="achievements">Достижения</string>
     <string name="see_all">Смотреть все</string>
     <string name="achievement_icon">Иконка достижения</string>
+
+    <string name="your_activity">Ваша активность</string>
+    <string name="share">Поделиться</string>
+    <string name="act_user_pic">Иконка пользователя в активности</string>
+    <string name="act_partner_pic">Иконка партнера в активности</string>
+    <string name="modules_done">Модулей пройдено</string>
+    <string name="tasks_done">Заданий выполнено</string>
+    <string name="cur_streak">Текущая серия дней</string>
+
     <string name="special_dates">Важные даты</string>
     <string name="in_9">Через 6 месяцев</string>
     <string name="date_date">12\nНояб</string>
     <string name="marriage_date">Годовщина свадьбы</string>
     <string name="add_spec_date">Добавить важную дату</string>
-    <string name="your_activity">Ваша активность</string>
-    <string name="modules_done">Модулей пройдено</string>
-    <string name="tasks_done">Заданий выполнено</string>
-    <string name="share">Поделиться</string>
-    <string name="cur_streak">Текущая серия дней</string>
     <string name="edit">Изменить информацию о важной дате</string>
     <string name="dash">-</string>
 
     <!-- ── History screen ────────────────────────── -->
-
-    <string name="screen_title_observe">Изучение</string>
-    <string name="notes">Заметки</string>
-
-
     <string name="screen_title_history">История</string>
     <string name="bookmarks">Закладки</string>
+    <string name="notes">Заметки</string>
     <string name="section_title_history_list">История прохождения упражнений по датам</string>
     <string name="cd_completion_status_user2">Статус прохождения юзером2</string>
     <string name="cd_completion_status_user1">Статус прохождения упражнения юзером1</string>
     <string name="cd_delete_history_entry">Кнопка удаления записи о прохождении упражнения</string>
 
+    <!-- ── Observe screen ────────────────────────── -->
+    <string name="screen_title_observe">Изучение</string>
+    <string name="love_card">Карта ваших отношений</string>
+    <string name="icon">icon</string>
+    <string name="love_map_description_1">Исследуйте миры друг друга</string>
+    <string name="love_map_description_2">Узнайте больше о желаниях и мечтах партнера</string>
+    <string name="emotional_bank_account">Банковский счет эмоций</string>
+    <string name="emotional_bank_desc_1">Инвестируйте в отношения</string>
+    <string name="emotional_bank_desc_2">Делайте \'вклады\' и следите за \'балансом\'</string>
+    <string name="explore_knowledge_base">База знаний</string>
+    <string name="knowledge_desc">Все основные материалы здесь</string>
+    <string name="section_learn">Учитесь</string>
+    <string name="section_practice">Практикуйтесь</string>
+    <string name="module_status_finished">Статус прохождения модуля: завершен</string>
+    <string name="module_status_in_progress">Статус модуля: в процессе</string>
 
 </resources>

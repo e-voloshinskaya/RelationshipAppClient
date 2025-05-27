@@ -15,7 +15,7 @@ class TodayFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Просто "надуваем" нашу XML-разметку для этого фрагмента
-        return inflater.inflate(R.layout.today_fragment, container, false)
+        return inflater.inflate(R.layout.fragment_today, container, false)
     }
 }
 

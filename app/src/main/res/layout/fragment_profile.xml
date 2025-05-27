@@ -13,13 +13,13 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/header_container"
         android:layout_width="0dp"
-        android:layout_height="56dp"
+        android:layout_height="50dp"
         android:background="?attr/colorSurface"
         android:elevation="8dp"
         android:paddingStart="16dp"
         android:paddingEnd="16dp"
         android:paddingTop="4dp"
-        android:paddingBottom="16dp"
+        android:paddingBottom="8dp"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
@@ -33,34 +33,27 @@
             android:textAppearance="?attr/textAppearanceHeadlineSmall"
             android:textColor="?attr/colorOnSurface"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/icon_notifications"
+            app:layout_constraintEnd_toStartOf="@id/icon_settings"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <ImageView
-            android:id="@+id/icon_notifications"
-            android:background="?attr/selectableItemBackgroundBorderless"
-            android:clickable="true"
-            android:focusable="true"
-            android:layout_width="30dp"
+        <!-- Иконка Настройки -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/icon_settings"
+            style="@style/Widget.App.Button.IconButton.Circular"
+            android:layout_width="36dp"
             android:layout_height="36dp"
             android:contentDescription="@string/settings"
-            android:src="@drawable/ic_settings"
+            app:icon="@drawable/ic_settings"
+            app:iconTint="?attr/colorOnSurfaceVariant"
+            android:text=""
+            app:iconSize="30dp"
+            android:padding="0dp"
+            app:iconPadding="0dp"
+            app:iconGravity="textStart"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:tint="?attr/colorOnSurfaceVariant" />
-        <!--
-        <ImageButton
-            android:id="@+id/icon_notifications2"
-            android:layout_width="30dp"
-            android:layout_height="36dp"
-            android:layout_gravity="top|end"
-            android:layout_margin="8dp"
-            android:background="?attr/selectableItemBackgroundBorderless"
-            android:contentDescription="@string/settings"android:padding="8dp"
-            android:src="@drawable/ic_edit"
-            app:tint="?attr/colorOnSurface" /> -->
+            app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -85,7 +78,7 @@
             android:paddingTop="72dp"
             android:paddingEnd="16dp">
 
-            <!-- res/layout/card_sunset.xml -->
+            <!-- Секция: Карточка партнеров -->
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -102,7 +95,6 @@
                     android:paddingHorizontal="10dp"
                     android:paddingVertical="16dp">
 
-                    <!-- Используем ConstraintLayout для идеального выравнивания -->
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -114,7 +106,9 @@
                             android:layout_height="80dp"
                             android:layout_marginStart="0dp"
                             android:layout_marginEnd="30dp"
-                            android:background="@drawable/circle_background"
+                            android:background="@drawable/avatar_circle"
+                            android:clickable="true"
+                            android:focusable="true"
                             android:contentDescription="@string/user_pic"
                             android:padding="16dp"
                             android:scaleType="centerInside"
@@ -147,7 +141,9 @@
                             android:layout_height="80dp"
                             android:layout_marginStart="30dp"
                             android:layout_marginEnd="0dp"
-                            android:background="@drawable/circle_background"
+                            android:background="@drawable/avatar_circle"
+                            android:clickable="true"
+                            android:focusable="true"
                             android:contentDescription="@string/partner_pic"
                             android:padding="16dp"
                             android:scaleType="centerInside"
@@ -213,21 +209,25 @@
                         android:textAppearance="?attr/textAppearanceTitleMedium"
                         android:textColor="?attr/colorOnSurface" />
 
-                    <TextView
-                        android:id="@+id/see_all_button"
+
+                    <!-- -->
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/see_all_achievements"
+                        style="@style/Widget.MaterialComponents.Button.TextButton"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:background="?attr/selectableItemBackgroundBorderless"
-                        android:clickable="true"
-                        android:focusable="true"
                         android:contentDescription="@string/see_all"
-                        android:drawablePadding="0dp"
-                        android:padding="4dp"
-                        android:gravity="center_vertical"
                         android:text="@string/see_all"
                         android:textAppearance="?attr/textAppearanceTitleSmall"
                         android:textColor="?attr/colorOnSurface"
-                        app:drawableEndCompat="@drawable/ic_right" />
+                        app:icon="@drawable/ic_right_big"
+                        app:iconGravity="textEnd"
+                        app:iconPadding="6dp"
+                        android:padding="4dp"
+                        android:minWidth="0dp"
+                        android:minHeight="0dp"
+                        android:textAllCaps="false"
+                        app:iconTint="?attr/colorOnSurface"/>
                 </LinearLayout>
 
                 <!-- Вторая строка: Список иконок-достижений
@@ -330,45 +330,24 @@
                         android:text="@string/your_activity"
                         android:textAppearance="?attr/textAppearanceTitleMedium"
                         android:textColor="?attr/colorOnSurface" />
-
-                    <!--
+                    <!-- Кнопка: поделиться активностью -->
                     <com.google.android.material.button.MaterialButton
-                        android:id="@+id/activity_share"
+                        android:id="@+id/share_activity"
                         style="@style/Widget.MaterialComponents.Button.TextButton"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:layout_marginStart="8dp"
-                        android:backgroundTint="@android:color/transparent"
-                        android:insetLeft="0dp"
-                        android:insetTop="0dp"
-                        android:insetRight="0dp"
-                        android:insetBottom="0dp"
-                        android:minWidth="0dp"
-                        android:minHeight="0dp"
-                        android:padding="4dp"
-                        android:text="@string/share"
-                        android:textAppearance="?attr/textAppearanceLabelLarge"
-                        android:textColor="?attr/colorOnSurface"
-                        app:icon="@drawable/ic_share"
-                        app:iconGravity="textEnd"
-                        app:iconPadding="8dp" />
-                    -->
-                    <TextView
-                        android:id="@+id/activity_share"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:gravity="center_vertical"
-                        android:background="?attr/selectableItemBackgroundBorderless"
-                        android:clickable="true"
-                        android:focusable="true"
                         android:contentDescription="@string/share"
-                        android:drawablePadding="6dp"
-                        app:drawableEndCompat="@drawable/ic_share_18"
-                        android:padding="4dp"
                         android:text="@string/share"
                         android:textAppearance="?attr/textAppearanceTitleSmall"
-                        android:textColor="?attr/colorOnSurface"/>
+                        android:textColor="?attr/colorOnSurface"
+                        app:icon="@drawable/ic_share_18"
+                        app:iconGravity="textEnd"
+                        app:iconPadding="6dp"
+                        android:padding="4dp"
+                        android:minWidth="0dp"
+                        android:minHeight="0dp"
+                        android:textAllCaps="false"
+                        app:iconTint="?attr/colorOnSurface"/>
 
                 </LinearLayout>
 
@@ -484,8 +463,8 @@
                                 android:layout_width="40dp"
                                 android:layout_height="40dp"
                                 android:layout_gravity="center"
-                                android:background="@drawable/circle_background"
-                                android:contentDescription="@string/user_pic"
+                                android:background="@drawable/avatar_circle"
+                                android:contentDescription="@string/act_user_pic"
                                 android:padding="4dp"
                                 android:scaleType="centerCrop"
                                 android:src="@drawable/ic_woman" />
@@ -539,8 +518,8 @@
                                 android:layout_width="40dp"
                                 android:layout_height="40dp"
                                 android:layout_gravity="center"
-                                android:background="@drawable/circle_background"
-                                android:contentDescription="@string/user_pic"
+                                android:background="@drawable/avatar_circle"
+                                android:contentDescription="@string/act_partner_pic"
                                 android:padding="4dp"
                                 android:scaleType="centerCrop"
                                 android:src="@drawable/ic_add" />
@@ -695,18 +674,19 @@
                 </LinearLayout>
             </LinearLayout>
 
-            <!-- Кнопка редактирования в правом верхнем углу (ImageButton остается прежним) -->
-            <ImageButton
+            <!-- Кнопка редактирования даты -->
+            <com.google.android.material.button.MaterialButton
                 android:id="@+id/button_edit_date"
+                style="@style/Widget.App.Button.IconButton.Circular"
                 android:layout_width="32dp"
                 android:layout_height="32dp"
                 android:layout_gravity="top|end"
                 android:layout_margin="8dp"
-                android:background="?attr/selectableItemBackgroundBorderless"
+                android:padding="4dp"
                 android:contentDescription="@string/edit"
-                android:padding="8dp"
-                android:src="@drawable/ic_edit"
-                app:tint="?attr/colorOnSurface" />
+                app:icon="@drawable/ic_edit"
+                app:iconTint="?attr/colorOnSurface"
+                app:iconSize="24dp"/>
 
         </FrameLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
@@ -722,28 +702,13 @@
     android:textAppearance="?attr/textAppearanceLabelLarge"
     app:backgroundTint="@color/purple_mild" />
 
-    </LinearLayout>
-
-
+            </LinearLayout>
             <!-- Дополнительное пространство в конце для прокрутки над bottom nav -->
             <!-- Высоту лучше привязать к реальной высоте BottomNavigationView или использовать fitSystemWindows -->
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="80dp" />
-        </LinearLayout>
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="80dp" />
+            </LinearLayout>
     </ScrollView>
-
-    <!-- Контейнер для нижней навигации
-    <FrameLayout
-        android:id="@+id/bottomNavContainer"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:background="?attr/colorSurface"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
-
-        <include layout="@layout/layout_bottom_nav" />
-    </FrameLayout>  -->
 
 </androidx.constraintlayout.widget.ConstraintLayout>

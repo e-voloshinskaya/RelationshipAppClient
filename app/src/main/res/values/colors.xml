@@ -24,6 +24,13 @@
     <color name="colorOnSurface">#1C1B1F</color>
     <color name="colorOutline">#79747E</color>
 
+    <color name="white_ripple_12_percent">#1FFFFFFF</color>
+    <color name="my_ripple_color">#1F6750A4</color>
+    <color name="white_ripple_20_percent">#33FFFFFF</color>
+    <color name="white_ripple_24_percent">#3DFFFFFF</color>
+    <color name="light_purple_ripple_20_percent">#336750A4</color>
+    <color name="light_purple_ripple_24_percent">#3D6750A4</color>
+
     <!-- Цвета для вертикальных полос -->
     <color name="red_mild">#FF8A65</color> <!-- Мягкий коралловый -->
     <color name="blue_mild">#4DB6AC</color> <!-- Тёплая бирюза -->
