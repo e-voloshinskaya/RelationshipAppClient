@@ -105,13 +105,29 @@
             android:layout_width="16dp"
             android:layout_height="match_parent" />
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/button_next_step"
+        <!-- Контейнер, чтобы две кнопки занимали одно место -->
+        <FrameLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Вперед" />
+            android:layout_weight="1">
 
+            <!-- Кнопка "Вперед" (для теории), стандартного вида -->
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/button_next_step_default"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Вперед" />
+
+            <!-- Кнопка "Ответить" (для теста), акцентного цвета -->
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/button_next_step_answer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Ответить"
+                app:backgroundTint="@color/green_mild"
+                android:visibility="gone" /> <!-- Изначально скрыта -->
+
+        </FrameLayout>
     </LinearLayout>
 
     <ProgressBar
@@ -125,5 +141,57 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:visibility="visible" />
+
+    <LinearLayout
+        android:id="@+id/empty_state_container"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginEnd="32dp"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:visibility="visible">
+
+        <ImageView
+            android:id="@+id/empty_state_icon"
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:src="@drawable/ic_error_cloud"
+            app:tint="?attr/colorSecondary"
+            android:contentDescription="@null" />
+
+        <TextView
+            android:id="@+id/empty_state_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:textAppearance="?attr/textAppearanceTitleLarge"
+            android:textColor="?attr/colorOnSurface"
+            tools:text="Ошибка загрузки" />
+
+        <TextView
+            android:id="@+id/empty_state_message"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:textAlignment="center"
+            android:textAppearance="?attr/textAppearanceBodyMedium"
+            android:textColor="?attr/colorOnSurfaceVariant"
+            tools:text="Не удалось загрузить материалы урока. Проверьте подключение к интернету." />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/empty_state_retry_button"
+            style="?attr/materialButtonOutlinedStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:text="Повторить" />
+
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
