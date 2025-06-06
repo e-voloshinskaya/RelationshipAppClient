@@ -31,14 +31,15 @@ class ExploreFragment : Fragment() {
 
         cardLearnMain.setOnClickListener {
             // Переход по action из nav_graph.xml
-            findNavController().navigate(R.id.action_explore_to_modules)
+            findNavController().navigate(R.id.action_explore_to_courseModules)
         }
 
-        // Добавь этот обработчик
+        /* ТЕСТ ТЕСТ ТЕСТ
         binding.buttonTempTestNavigation.setOnClickListener {
             // Здесь мы вызываем action, который только что создали в nav_graph
             findNavController().navigate(R.id.action_exploreFragment_to_moduleStepFragment)
         }
+         */
     }
 
     override fun onDestroyView() {

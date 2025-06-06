@@ -31,9 +31,14 @@ class CourseModulesFragment : Fragment() {
     // Создаем адаптер "лениво", чтобы он создался только при первом обращении.
     private val modulesAdapter by lazy {
         ModulesAdapter { module ->
-            // Это лямбда-выражение, которое выполнится при клике на элемент списка.
-            // TODO: Заменить на навигацию к экрану деталей модуля.
-            Toast.makeText(requireContext(), "Нажат модуль: ${module.title}", Toast.LENGTH_SHORT).show()
+            // 1. Создаем action для перехода, передавая в него ID нажатого модуля.
+            //    Имя action (CourseModulesFragmentDirections) генерируется автоматически
+            //    библиотекой Navigation Component из твоего nav_graph.xml.
+            val action = CourseModulesFragmentDirections.actionCourseModulesFragmentToModuleStepFragment(
+                MODULEID = module.id // Передаем ID модуля в аргумент. Имя аргумента (MODULEID) должно совпадать с тем, что в nav_graph.
+            )
+            // 2. Выполняем переход с помощью NavController'а.
+            findNavController().navigate(action)
         }
     }
 

@@ -39,15 +39,15 @@
                 android:layout_height="300dp"
                 android:layout_marginTop="16dp" />
 
-            <!-- Индикатор-точки для навигации по вопросам -->
-            <com.google.android.material.tabs.TabLayout
-                android:id="@+id/questions_tab_indicator"
-                android:layout_width="match_parent"
+            <TextView
+                android:id="@+id/tv_question_progress"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@android:color/transparent"
-                app:tabBackground="@drawable/tab_selector"
-                app:tabGravity="center"
-                app:tabIndicatorHeight="0dp"/>
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="16dp"
+                android:textAppearance="?attr/textAppearanceLabelMedium"
+                android:textColor="?attr/colorOnSurfaceVariant"
+                tools:text="Вопрос 1 из 5" />
 
         </LinearLayout>
     </LinearLayout>

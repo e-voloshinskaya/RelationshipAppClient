@@ -2,6 +2,7 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
 
+    id("androidx.navigation.safeargs.kotlin")
     // for Supabase
     kotlin("plugin.serialization") version "2.0.0"
 

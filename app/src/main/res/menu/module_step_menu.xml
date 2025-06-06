@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/action_exit_lesson"
+        android:icon="@drawable/ic_back"
+        android:title="Выйти из урока" />
+
+    <item
+        android:id="@+id/action_add_bookmark"
+        android:icon="@drawable/ic_bookmark"
+        android:title="Добавить закладку" />
+
+    <item
+        android:id="@+id/action_share"
+        android:icon="@drawable/ic_share"
+        android:title="Поделиться" />
+
+    <item
+        android:id="@+id/action_report_problem"
+        android:icon="@drawable/ic_report"
+        android:title="Сообщить о проблеме" />
+
+</menu>

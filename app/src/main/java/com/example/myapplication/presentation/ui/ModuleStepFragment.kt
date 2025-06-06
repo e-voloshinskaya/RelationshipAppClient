@@ -1,11 +1,8 @@
 package com.example.myapplication.presentation.ui
 
-// Важно: импортируем новые data-классы и старые для UI
-import com.example.myapplication.R // Убедись, что этот импорт правильный
-import com.example.myapplication.databinding.FragmentModuleStepBinding
-import com.example.myapplication.databinding.ItemTestContainerBinding
-import com.example.myapplication.databinding.ItemTheoryBlockBinding
-import com.google.android.material.tabs.TabLayoutMediator
+import android.content.Intent
+import android.net.Uri
+import androidx.appcompat.widget.PopupMenu
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -19,16 +16,19 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
+import androidx.viewpager2.widget.ViewPager2
+import com.example.myapplication.databinding.FragmentModuleStepBinding
+import com.example.myapplication.databinding.ItemTestContainerBinding
+import com.example.myapplication.databinding.ItemTheoryBlockBinding
+import com.example.myapplication.presentation.adapters.TestsAdapter
 import kotlinx.coroutines.launch
-
-// Импортируем все необходимое из твоего файла с моделями и ViewModel
 import ModuleContentItem
 import ModuleStepViewModel
 import ModuleStepViewModelFactory
 import ModuleUiState
 import TestItem
-import TestsAdapter
-import TheoryItem // <- Наш новый класс для теории
+import TheoryItem
+import com.example.myapplication.R
 
 class ModuleStepFragment : Fragment() {
 
@@ -36,76 +36,136 @@ class ModuleStepFragment : Fragment() {
     private var _binding: FragmentModuleStepBinding? = null
     private val binding get() = _binding!!
 
+    // Ссылка на ViewPager, чтобы мы могли управлять им из разных частей фрагмента.
+    private var testViewPager: ViewPager2? = null
+
     // Инициализируем ViewModel с помощью фабрики.
-    // Фабрика сама подставит и moduleId, и Supabase клиент.
     private val viewModel: ModuleStepViewModel by viewModels {
-        // Когда будешь переходить со списка модулей, раскомментируй этот блок
-        /*
+        // 1. Получаем moduleId из аргументов, которые нам передал CourseModulesFragment
         val moduleId = requireArguments().getString("MODULE_ID")
             ?: throw IllegalStateException("Module ID is required for this screen")
+
+        // 2. Используем нашу фабрику для создания ViewModel с реальным ID
         ModuleStepViewModelFactory(moduleId)
-        */
 
         // ВРЕМЕННЫЙ КОД ДЛЯ ТЕСТИРОВАНИЯ: используем "захардкоженный" ID
-        val hardcodedModuleId = "c53286b4-38f0-43f7-8afb-f27e178b2bf4"
-        ModuleStepViewModelFactory(hardcodedModuleId)
+        //val hardcodedModuleId = "c53286b4-38f0-43f7-8afb-f27e178b2bf4"
+        //ModuleStepViewModelFactory(hardcodedModuleId)
     }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        // Инициализируем биндинг для макета фрагмента
         _binding = FragmentModuleStepBinding.inflate(inflater, container, false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        // Настраиваем все обработчики нажатий
         setupClickListeners()
-        // Запускаем наблюдение за состоянием ViewModel
         observeViewModel()
     }
 
     private fun setupClickListeners() {
-        // Навигация по шагам модуля
-        binding.buttonNextStep.setOnClickListener { viewModel.nextStep() }
-        binding.buttonPreviousStep.setOnClickListener { viewModel.previousStep() }
+        binding.buttonNextStep.setOnClickListener {
+            val testPager = testViewPager
+            if (testPager != null && testPager.currentItem < (testPager.adapter?.itemCount ?: 0) - 1) {
+                // Если на экране тест и это не последний вопрос, листаем вопрос вперед.
+                testPager.currentItem += 1
+            } else {
+                // Если это теория или последний вопрос теста, переходим на следующий шаг модуля.
+                viewModel.nextStep()
+            }
+        }
 
-        // Кнопка "назад" в тулбаре
+        binding.buttonPreviousStep.setOnClickListener {
+            val testPager = testViewPager
+            if (testPager != null && testPager.currentItem > 0) {
+                // Если на экране тест и это не первый вопрос, листаем вопрос назад.
+                testPager.currentItem -= 1
+            } else {
+                // Если это теория или первый вопрос теста, переходим на предыдущий шаг модуля.
+                viewModel.previousStep()
+            }
+        }
+
+        // Обработчик для кнопки "назад" в тулбаре
         binding.toolbar.setNavigationOnClickListener {
-            // Этот метод безопасно вернет нас на предыдущий экран
             findNavController().navigateUp()
         }
-        // Если ты используешь кастомную кнопку, а не стандартную навигацию тулбара:
-        // binding.buttonBack.setOnClickListener { findNavController().navigateUp() }
+
+        // --- НАЧАЛО ИЗМЕНЕНИЙ: ОБРАБОТЧИК ДЛЯ НОВОЙ КНОПКИ "ТРИ ТОЧКИ" ---
+        binding.buttonMoreOptions.setOnClickListener { view ->
+            showOptionsMenu(view)
+        }
+    }
+
+    private fun showOptionsMenu(anchorView: View) {
+        // Создаем PopupMenu, привязанное к контексту фрагмента и "якорю" (нашей кнопке)
+        val popupMenu = PopupMenu(requireContext(), anchorView)
+
+        // "Надуваем" наше меню из XML-файла
+        popupMenu.menuInflater.inflate(R.menu.module_step_menu, popupMenu.menu)
+
+        // Устанавливаем обработчик нажатий на пункты этого меню
+        popupMenu.setOnMenuItemClickListener { menuItem ->
+            when (menuItem.itemId) {
+                // ID из нашего обновленного menu.xml
+                R.id.action_report_problem -> {
+                    val url = "https://docs.google.com/forms/d/e/1FAIpQLScMaHPzEd_pnbDq8XMBOQCyDHfzOlkRic2y_E6ATSbTmK4JHg/viewform?usp=preview"
+                    val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
+                    try {
+                        startActivity(intent)
+                    } catch (e: Exception) {
+                        Toast.makeText(requireContext(), "Не удалось открыть ссылку", Toast.LENGTH_SHORT).show()
+                    }
+                    true
+                }
+                R.id.action_exit_lesson -> {
+                    findNavController().navigateUp()
+                    true
+                }
+                // Заглушки для новых кнопок
+                R.id.action_add_bookmark, R.id.action_share -> {
+                    Toast.makeText(requireContext(), "${menuItem.title} в разработке", Toast.LENGTH_SHORT).show()
+                    true
+                }
+                else -> false
+            }
+        }
+
+        // Включаем показ иконок (по умолчанию они могут быть скрыты)
+        // Этот трюк использует рефлексию, но он безопасен и широко используется
+        try {
+            val fieldMPopup = PopupMenu::class.java.getDeclaredField("mPopup")
+            fieldMPopup.isAccessible = true
+            val mPopup = fieldMPopup.get(popupMenu)
+            mPopup.javaClass
+                .getDeclaredMethod("setForceShowIcon", Boolean::class.java)
+                .invoke(mPopup, true)
+        } catch (e: Exception) {
+            Log.e("ModuleStepFragment", "Error showing menu icons.", e)
+        }
+
+        // Показываем меню
+        popupMenu.show()
     }
 
     private fun observeViewModel() {
-        // Используем lifecycleScope для безопасного запуска корутин,
-        // которые будут жить столько же, сколько и View фрагмента.
         viewLifecycleOwner.lifecycleScope.launch {
-            // repeatOnLifecycle гарантирует, что сбор данных будет происходить
-            // только когда фрагмент находится в состоянии STARTED или выше.
             repeatOnLifecycle(Lifecycle.State.STARTED) {
-
-                // Первая корутина следит за общим состоянием (загрузка, успех, ошибка)
+                // Эта корутина следит за общим состоянием и сменой ШАГА МОДУЛЯ
                 launch {
                     viewModel.uiState.collect { state ->
-                        // Передаем и состояние, и текущий индекс для отрисовки
                         updateUiForState(state, viewModel.currentStepIndex.value)
                     }
                 }
-
-                // Вторая корутина отдельно следит ТОЛЬКО за сменой индекса.
-                // Это нужно, чтобы при нажатии "вперед/назад" UI обновлялся мгновенно,
-                // даже если данные уже давно загружены и uiState = Success.
+                // Эта корутина отдельно следит за сменой индекса ШАГА МОДУЛЯ,
+                // чтобы UI мгновенно обновлялся при вызове viewModel.nextStep() / previousStep()
                 launch {
                     viewModel.currentStepIndex.collect { index ->
                         val currentState = viewModel.uiState.value
-                        // Обновляем UI только если данные уже успешно загружены
                         if (currentState is ModuleUiState.Success) {
                             updateUi(currentState.content, index)
                         }
@@ -115,17 +175,11 @@ class ModuleStepFragment : Fragment() {
         }
     }
 
-    /**
-     * Главная функция, которая решает, что показать: загрузку, ошибку или контент.
-     */
     private fun updateUiForState(state: ModuleUiState, currentIndex: Int) {
-        // Скрываем все состояния перед тем, как показать нужное
-        binding.progressBar.isVisible = false
+        // Показываем/скрываем ProgressBar
+        binding.progressBar.isVisible = state is ModuleUiState.Loading
 
         when (state) {
-            is ModuleUiState.Loading -> {
-                binding.progressBar.isVisible = true
-            }
             is ModuleUiState.Success -> {
                 // Если данные пришли, вызываем функцию для их отрисовки
                 updateUi(state.content, currentIndex)
@@ -134,261 +188,117 @@ class ModuleStepFragment : Fragment() {
                 // В случае ошибки показываем ее пользователю
                 showError(state.message)
             }
-
-            else -> {}
+            else -> { /* Для Loading больше ничего делать не нужно */ }
         }
     }
 
-    /**
-     * Эта функция отвечает за отрисовку конкретного шага (теории или теста).
-     */
     private fun updateUi(content: List<ModuleContentItem>, currentIndex: Int) {
         if (content.isEmpty() || currentIndex !in content.indices) {
-            Log.w("ModuleStepFragment", "Контент пуст или индекс выходит за границы. Нечего отображать.")
-            // Можно показать какой-то плейсхолдер, что модуль пуст
+            Log.w("ModuleStepFragment", "Контент пуст или индекс выходит за границы.")
             return
         }
 
+        // --- ИЗМЕНЕНИЕ 2: СБРОС VIEWPAGER ПЕРЕД ОТРИСОВКОЙ НОВОГО ШАГА ---
+        testViewPager = null
+
         val currentItem = content[currentIndex]
-        // Очищаем контейнер перед добавлением нового элемента
         binding.contentContainer.removeAllViews()
 
-        // В зависимости от типа элемента вызываем нужную функцию для отрисовки
         when (currentItem) {
             is TheoryItem -> showTheory(currentItem)
             is TestItem -> showTest(currentItem)
+            else -> {}
         }
 
-        // Обновляем состояние кнопок навигации
-        binding.buttonPreviousStep.isEnabled = currentIndex > 0
-        binding.buttonNextStep.isEnabled = currentIndex < content.size - 1
+        // --- ИЗМЕНЕНИЕ 3: ВЫЗОВ НОВОЙ ФУНКЦИИ ДЛЯ ОБНОВЛЕНИЯ КНОПОК ---
+        updateMainNavigationButtons()
 
-        // Обновляем прогресс-бар
+        // Обновляем общий прогресс-бар модуля
         binding.moduleProgress.progress = ((currentIndex + 1) * 100 / content.size)
     }
 
-    /**
-     * Создает и показывает карточку с теорией.
-     */
-    private fun showTheory(item: TheoryItem) {
-        // Создаем View из XML-макета карточки теории
-        val theoryBinding = ItemTheoryBlockBinding.inflate(layoutInflater, binding.contentContainer, false)
+    // --- ИЗМЕНЕНИЕ 4: НОВАЯ ФУНКЦИЯ ДЛЯ УПРАВЛЕНИЯ ГЛАВНЫМИ КНОПКАМИ ---
+    private fun updateMainNavigationButtons() {
+        val currentStepIndex = viewModel.currentStepIndex.value
+        val totalSteps = (viewModel.uiState.value as? ModuleUiState.Success)?.content?.size ?: 0
 
-        // Заполняем View данными из нашей модели
+        val testPager = testViewPager
+        if (testPager != null) {
+            // Если на экране тест, состояние кнопок зависит и от шага, и от вопроса
+            val currentQuestionIndex = testPager.currentItem
+            val totalQuestions = testPager.adapter?.itemCount ?: 0
+
+            binding.buttonPreviousStep.isEnabled = currentStepIndex > 0 || currentQuestionIndex > 0
+            binding.buttonNextStep.isEnabled = currentStepIndex < totalSteps - 1 || currentQuestionIndex < totalQuestions - 1
+        } else {
+            // Если на экране теория, все просто
+            binding.buttonPreviousStep.isEnabled = currentStepIndex > 0
+            binding.buttonNextStep.isEnabled = currentStepIndex < totalSteps - 1
+        }
+    }
+
+    private fun showTheory(item: TheoryItem) {
+        val theoryBinding = ItemTheoryBlockBinding.inflate(layoutInflater, binding.contentContainer, false)
         theoryBinding.tvTheoryTitle.text = item.details?.title ?: "Теория"
         theoryBinding.tvTheoryBody.text = item.details?.content ?: "Нет содержимого."
-
-        // Добавляем созданный View в контейнер на экране
         binding.contentContainer.addView(theoryBinding.root)
 
-        // Обновляем заголовок на тулбаре
-        binding.toolbarTitle.text = item.details?.title ?: "Теория"
+        val currentStep = viewModel.currentStepIndex.value + 1
+        val totalSteps = (viewModel.uiState.value as? ModuleUiState.Success)?.content?.size ?: 1
+        binding.toolbarTitle.text = "Раздел $currentStep из $totalSteps"
     }
 
-    /**
-     * Создает и показывает карточку с тестом.
-     */
+    // --- ИЗМЕНЕНИЕ 5: ПОЛНОСТЬЮ ПЕРЕРАБОТАННАЯ ФУНКЦИЯ SHOWTEST ---
     private fun showTest(item: TestItem) {
-        // Создаем View из XML-макета контейнера для теста
         val testBinding = ItemTestContainerBinding.inflate(layoutInflater, binding.contentContainer, false)
-
-        // Заполняем заголовок теста
         testBinding.tvTestTitle.text = item.details?.title ?: "Тест"
 
-        // Получаем список вопросов, если он есть
         val questions = item.details?.questions ?: emptyList()
-        val testsAdapter = TestsAdapter(questions) // Создаем адаптер для ViewPager2
-        testBinding.questionsViewPager.adapter = testsAdapter
+        val testsAdapter = TestsAdapter(questions)
 
-        // Связываем ViewPager2 с индикатором-точками (TabLayout)
-        TabLayoutMediator(testBinding.questionsTabIndicator, testBinding.questionsViewPager) { _, _ -> }.attach()
-        // Скрываем индикатор, если вопрос всего один
-        testBinding.questionsTabIndicator.isVisible = questions.size > 1
+        // Сохраняем ссылку на ViewPager в переменную класса
+        testViewPager = testBinding.questionsViewPager
+        testViewPager?.adapter = testsAdapter
 
-        // Добавляем созданный View в контейнер на экране
+        // Функция для обновления текстового индикатора "Вопрос X из Y"
+        fun updateQuestionProgress(position: Int) {
+            val total = questions.size
+            if (total > 1) {
+                testBinding.tvQuestionProgress.isVisible = true
+                testBinding.tvQuestionProgress.text = "Вопрос ${position + 1} из $total"
+            } else {
+                testBinding.tvQuestionProgress.isVisible = false
+            }
+        }
+
+        // Слушаем смену страниц, чтобы обновлять индикатор и главные кнопки
+        testViewPager?.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
+            override fun onPageSelected(position: Int) {
+                super.onPageSelected(position)
+                updateQuestionProgress(position)
+                updateMainNavigationButtons()
+            }
+        })
+
+        // Инициализируем индикатор для первой страницы
+        updateQuestionProgress(0)
+
         binding.contentContainer.addView(testBinding.root)
 
-        // Обновляем заголовок на тулбаре
-        binding.toolbarTitle.text = item.details?.title ?: "Тест"
+        val currentStep = viewModel.currentStepIndex.value + 1
+        val totalSteps = (viewModel.uiState.value as? ModuleUiState.Success)?.content?.size ?: 1
+        binding.toolbarTitle.text = "Раздел $currentStep из $totalSteps"
     }
 
-    /**
-     * Показывает ошибку пользователю.
-     */
     private fun showError(message: String) {
-        // Самый простой способ — показать Toast
         Toast.makeText(requireContext(), "Ошибка: $message", Toast.LENGTH_LONG).show()
         Log.e("ModuleStepFragment", "Произошла ошибка: $message")
-        // Здесь можно добавить более сложную логику, например, показать кнопку "Повторить"
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
-        // Очищаем биндинг, чтобы избежать утечек памяти
+        // Очищаем ViewPager и биндинг, чтобы избежать утечек памяти
+        testViewPager = null
         _binding = null
     }
 }
-
-/*package com.example.myapplication.presentation.ui
-
-import ModuleContentItem
-import ModuleStepViewModel
-import ModuleStepViewModelFactory
-import ModuleUiState
-import TestItem
-import TestsAdapter
-import TheoryBlock
-import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
-import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.lifecycleScope
-import androidx.lifecycle.repeatOnLifecycle
-import com.example.myapplication.databinding.FragmentModuleStepBinding
-import com.example.myapplication.databinding.ItemTestContainerBinding
-import com.example.myapplication.databinding.ItemTheoryBlockBinding
-import com.google.android.material.tabs.TabLayoutMediator
-import kotlinx.coroutines.launch
-
-class ModuleStepFragment : Fragment() {
-
-    // Замени на биндинг твоего главного макета (fragment_module_step.xml)
-    private lateinit var binding: FragmentModuleStepBinding
-    /*
-    private val viewModel: ModuleStepViewModel by viewModels {
-        // 1. Получаем moduleId из аргументов фрагмента
-        // (Это стандартный способ передать ID во фрагмент)
-        val moduleId = requireArguments().getString("MODULE_ID")
-            ?: throw IllegalStateException("Module ID is required")
-
-        // 2. Используем нашу новую фабрику для создания ViewModel
-        ModuleStepViewModelFactory(moduleId)
-    } */
-    private val viewModel: ModuleStepViewModel by viewModels {
-        // val moduleId = requireArguments().getString("MODULE_ID")
-        //     ?: throw IllegalStateException("Module ID is required")
-
-        // ВРЕМЕННО ЗАКОММЕНТИРУЙ КОД ВЫШЕ И ВСТАВЬ ID ВРУЧНУЮ
-        val hardcodedModuleId = "c53286b4-38f0-43f7-8afb-f27e178b2bf4"
-
-        ModuleStepViewModelFactory(hardcodedModuleId)
-    }
-
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        binding = FragmentModuleStepBinding.inflate(inflater, container, false)
-        return binding.root
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-        setupClickListeners()
-        observeViewModel()
-    }
-
-    private fun setupClickListeners() {
-        binding.buttonNextStep.setOnClickListener { viewModel.nextStep() }
-        binding.buttonPreviousStep.setOnClickListener { viewModel.previousStep() }
-        // Добавь обработчик для кнопки "назад" в тулбаре, если нужно
-        // binding.appBarLayout.toolbar.setNavigationOnClickListener { ... }
-    }
-
-    private fun observeViewModel() {
-        viewLifecycleOwner.lifecycleScope.launch {
-            repeatOnLifecycle(Lifecycle.State.STARTED) {
-                // Эта корутина будет следить за общим состоянием (загрузка/успех/ошибка)
-                // и за сменой шага, чтобы перерисовать UI.
-                viewModel.uiState.collect { state ->
-                    // Мы также слушаем currentStepIndex, чтобы получить актуальный индекс
-                    updateUiForState(state, viewModel.currentStepIndex.value)
-                }
-            }
-        }
-
-        viewLifecycleOwner.lifecycleScope.launch {
-            repeatOnLifecycle(Lifecycle.State.STARTED) {
-                // Эта корутина отдельно следит ТОЛЬКО за сменой индекса.
-                // Она нужна, чтобы при нажатии "вперед/назад" UI обновлялся мгновенно,
-                // даже если данные уже загружены.
-                viewModel.currentStepIndex.collect { index ->
-                    val currentState = viewModel.uiState.value
-                    if (currentState is ModuleUiState.Success) {
-                        updateUi(currentState.content, index)
-                    }
-                }
-            }
-        }
-    }
-
-    private fun updateUiForState(state: ModuleUiState, currentIndex: Int) {
-        when (state) {
-            is ModuleUiState.Loading -> showLoading(true)
-            is ModuleUiState.Success -> {
-                showLoading(false)
-                updateUi(state.content, currentIndex)
-            }
-            is ModuleUiState.Error -> {
-                showLoading(false)
-                showError(state.message)
-            }
-
-            else -> {}
-        }
-    }
-
-    private fun updateUi(content: List<ModuleContentItem>, currentIndex: Int) {
-        if (content.isEmpty()) return
-
-        val currentItem = content[currentIndex]
-        binding.contentContainer.removeAllViews()
-
-        when (currentItem) {
-            is TheoryBlock -> showTheory(currentItem)
-            is TestItem -> showTest(currentItem)
-            else -> {}
-        }
-
-        binding.buttonPreviousStep.isEnabled = currentIndex > 0
-        binding.buttonNextStep.isEnabled = currentIndex < content.size - 1
-
-        binding.moduleProgress.progress = ((currentIndex + 1) * 100 / content.size)
-    }
-
-    private fun showTheory(item: TheoryBlock) {
-        // Замени на биндинг твоей карточки с теорией (content_theory_card.xml)
-        val theoryBinding = ItemTheoryBlockBinding.inflate(layoutInflater, binding.contentContainer, false)
-        theoryBinding.tvTheoryTitle.text = item.title
-        theoryBinding.tvTheoryBody.text = item.content
-        binding.contentContainer.addView(theoryBinding.root)
-        binding.toolbarTitle.text = "Теория"
-    }
-
-    private fun showTest(item: TestItem) {
-        // Замени на биндинг твоего контейнера для теста (content_test_container.xml)
-        val testBinding = ItemTestContainerBinding.inflate(layoutInflater, binding.contentContainer, false)
-        testBinding.tvTestTitle.text = item.details?.title
-
-        val questions = item.details?.questions ?: emptyList()
-        val testsAdapter = TestsAdapter(questions) // Адаптер для ViewPager2
-        testBinding.questionsViewPager.adapter = testsAdapter
-
-        TabLayoutMediator(testBinding.questionsTabIndicator, testBinding.questionsViewPager) { _, _ -> }.attach()
-
-        binding.contentContainer.addView(testBinding.root)
-        binding.toolbarTitle.text = "Тест"
-    }
-
-    private fun showLoading(isLoading: Boolean) {
-        // Здесь логика показа/скрытия ProgressBar
-    }
-
-    private fun showError(message: String) {
-        // Здесь логика показа ошибки (например, через Toast или Snackbar)
-    }
-}*/

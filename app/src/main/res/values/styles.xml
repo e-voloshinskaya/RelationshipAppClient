@@ -14,6 +14,20 @@
         <item name="android:windowLightStatusBar">true</item> <!-- для светлого текста -->
     </style>
 
+    <!-- Стиль для стандартной кнопки "Вперед" (для теории) -->
+    <style name="Widget.App.Button.Next" parent="Widget.Material3.Button">
+        <!-- Здесь можно задать цвета по умолчанию, если нужно,
+             но обычно стандартные цвета темы подходят -->
+    </style>
+
+    <!-- Стиль для акцентной кнопки "Ответить" (для теста) -->
+    <style name="Widget.App.Button.Answer" parent="Widget.Material3.Button">
+        <!-- Устанавливаем другой цвет фона -->
+        <item name="backgroundTint">@color/green_mild</item> <!-- Используй свой акцентный цвет -->
+        <!-- Можно поменять и цвет текста, если нужно -->
+        <item name="android:textColor">?attr/colorOnPrimary</item>
+    </style>
+
     <!-- Bottom Navigation -->
     <style name="Widget.MyApp.BottomNav" parent="Widget.Material3.BottomNavigationView">
         <item name="labelVisibilityMode">labeled</item>

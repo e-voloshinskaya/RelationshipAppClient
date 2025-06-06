@@ -44,9 +44,11 @@
 
             <!-- ДОБАВЛЕН ACTION для перехода на modulesFragment -->
             <action
-                android:id="@+id/action_explore_to_modules"
-                app:destination="@id/modulesFragment" />
+                android:id="@+id/action_explore_to_courseModules"
+                app:destination="@id/courseModulesFragment" />
 
+
+            <!-- ТЕСТ ТЕСТ ТЕСТ ТЕСТ -->
             <action
                 android:id="@+id/action_exploreFragment_to_moduleStepFragment"
                 app:destination="@id/moduleStepFragment" />
@@ -76,13 +78,20 @@
 
         <!-- modulesFragment недоступен напрямую из BottomNav, но доступен через action -->
         <fragment
-            android:id="@+id/modulesFragment"
+            android:id="@+id/courseModulesFragment"
             android:name="com.example.myapplication.presentation.ui.CourseModulesFragment"
             android:label="Course Modules">
 
             <action
-                android:id="@+id/action_modulesFragment_to_moduleStepFragment"
-                app:destination="@id/moduleStepFragment" />
+                android:id="@+id/action_courseModulesFragment_to_moduleStepFragment"
+                app:destination="@id/moduleStepFragment">
+
+                <!-- Мы явно говорим этому action'у, что он будет передавать аргумент MODULE_ID -->
+                <argument
+                    android:name="MODULE_ID"
+                    app:argType="string" />
+
+            </action>
         </fragment>
 
         <fragment
@@ -90,7 +99,7 @@
             android:name="com.example.myapplication.presentation.ui.ModuleStepFragment"
             android:label="Module Content"
             tools:layout="@layout/fragment_module_step" >
-            <!-- Этот аргумент мы будем передавать в будущем, когда переход будет "настоящим" -->
+            <!-- Этот аргумент необходим для открытия заданного модуля -->
             <argument
                 android:name="MODULE_ID"
                 app:argType="string" />
