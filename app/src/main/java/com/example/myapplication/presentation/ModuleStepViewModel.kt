@@ -48,14 +48,12 @@ class ModuleStepViewModel(
                         order,
                         content_type,
 
-                        // Алиас: создаем JSON-объект "TheoryBlocks" из связи "theory_id"
                         TheoryBlocks:theory_id(
                             theory_id,
                             theory_title,
                             content
                         ),
 
-                        // Алиас: создаем JSON-объект "Tests" из связи "test_id"
                         Tests:test_id(
                             test_id,
                             title,

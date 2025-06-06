@@ -20,16 +20,8 @@
         <com.google.android.material.appbar.MaterialToolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize">
-
-            <!-- Кнопка "Назад" -->
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/button_back"
-                style="@style/Widget.App.Button.IconButton.Circular"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:layout_gravity="start|center_vertical"
-                app:icon="@drawable/ic_back" /> <!-- Убедись, что иконка есть -->
+            android:layout_height="?attr/actionBarSize"
+            app:navigationIcon="@drawable/ic_back">
 
             <!-- Название курса или модуля -->
             <TextView
@@ -56,6 +48,7 @@
 
     <!-- 2. Прокручиваемая область, где будут наши карточки -->
     <ScrollView
+        android:id="@+id/scrollView"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:clipToPadding="false"
@@ -67,8 +60,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
 
-        <!-- Этот FrameLayout - контейнер, куда мы будем программно вставлять
-             карточку с теорией или тестом -->
         <FrameLayout
             android:id="@+id/content_container"
             android:layout_width="match_parent"
@@ -112,5 +103,17 @@
             android:text="Вперед" />
 
     </LinearLayout>
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:visibility="visible" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
