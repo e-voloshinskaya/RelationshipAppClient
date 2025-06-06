@@ -32,6 +32,11 @@ android {
             )
         }
     }
+
+    buildFeatures {
+        viewBinding = true
+    }
+
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11
@@ -58,6 +63,7 @@ dependencies {
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.androidx.activity)
+    implementation(libs.androidx.core)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
@@ -71,6 +77,7 @@ dependencies {
     implementation(libs.storage.kt)
     implementation(libs.functions.kt)
     implementation(libs.ktor.client.android)
+    implementation(libs.kotlinx.serialization.json)
 
     // Firebase Google
     implementation(platform(libs.firebase.bom))

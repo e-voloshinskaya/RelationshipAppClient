@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="16dp"
+    android:layout_marginEnd="16dp"
+    android:layout_marginTop="1dp"
+    android:layout_marginBottom="0dp"
+    android:clickable="true"
+    android:focusable="true"
+    app:cardBackgroundColor="@color/white"
+    app:cardCornerRadius="12dp"
+    app:cardElevation="1dp"
+    app:rippleColor="#1F000000">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp">
+
+        <!-- Иконка слева (опционально) -->
+        <ImageView
+            android:id="@+id/icon_setting"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:contentDescription="sdg"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:tint="?attr/colorPrimary"
+            tools:src="@drawable/ic_settings" />
+
+        <!-- Название настройки -->
+        <TextView
+            android:id="@+id/text_setting_title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:textAppearance="?attr/textAppearanceBodyLarge"
+            android:textColor="?attr/colorOnSurface"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/icon_arrow"
+            app:layout_constraintStart_toEndOf="@id/icon_setting"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Настройка профиля" />
+
+        <!-- Стрелка вправо -->
+        <ImageView
+            android:id="@+id/icon_arrow"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:contentDescription="gdh"
+            android:src="@drawable/ic_right"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:tint="?attr/colorOnSurfaceVariant" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</com.google.android.material.card.MaterialCardView>

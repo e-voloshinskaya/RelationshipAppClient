@@ -6,6 +6,7 @@
     <uses-permission android:name="android.permission.WAKE_LOCK" />
 
     <application
+        android:name=".SupabaseInit"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
@@ -17,11 +18,24 @@
         tools:targetApi="31">
         <activity
             android:name=".presentation.MainActivity"
-            android:exported="true">
+            android:exported="true"
+            android:launchMode="singleTask">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+
+            <intent-filter>
+                <!-- Говорим, что мы можем быть открыты по ссылке -->
+                <action android:name="android.intent.action.VIEW" />
+                <!-- Говорим, что это наша ссылка по умолчанию для этой схемы -->
+                <category android:name="android.intent.category.DEFAULT" />
+                <!-- Говорим, что ссылка может быть найдена в браузере -->
+                <category android:name="android.intent.category.BROWSABLE"/>
+                <!-- Указываем саму схему и хост -->
+                <data
+                    android:host="login-callback"
+                    android:scheme="com.example.myapplication" />
             </intent-filter>
         </activity>
     </application>

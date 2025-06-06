@@ -1,33 +1,95 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/exploreFragment">
+    app:startDestination="@id/splashFragment"> <!-- СТАРТОВЫЙ ЭКРАН -->
 
     <fragment
-        android:id="@+id/todayFragment"
-        android:name="com.example.myapplication.presentation.ui.TodayFragment"
-        android:label="Today" />
+        android:id="@+id/splashFragment"
+        android:name="com.example.myapplication.presentation.ui.SplashFragment"
+        android:label="SplashFragment"
+        tools:layout="@layout/fragment_splash">
+
+        <!-- Действие: перейти от Splash к Экрану Авторизации -->
+        <action
+            android:id="@+id/action_splashFragment_to_authFragment"
+            app:destination="@id/authFragment"
+            app:popUpTo="@id/splashFragment"
+            app:popUpToInclusive="true"
+            app:launchSingleTop="true"/>
+
+        <!-- Действие: перейти от Splash к Главному графу -->
+        <action
+            android:id="@+id/action_splashFragment_to_main_graph"
+            app:destination="@id/main_graph"
+            app:popUpTo="@id/splashFragment"
+            app:popUpToInclusive="true"
+            app:launchSingleTop="true"/>
+    </fragment>
+
+
+    <navigation
+        android:id="@+id/main_graph"
+        app:startDestination="@id/exploreFragment">
+        <fragment
+            android:id="@+id/todayFragment"
+            android:name="com.example.myapplication.presentation.ui.TodayFragment"
+            android:label="Today" />
+
+        <fragment
+            android:id="@+id/exploreFragment"
+            android:name="com.example.myapplication.presentation.ui.ExploreFragment"
+            android:label="Explore">
+
+            <!-- ДОБАВЛЕН ACTION для перехода на modulesFragment -->
+            <action
+                android:id="@+id/action_explore_to_modules"
+                app:destination="@id/modulesFragment" />
+
+        </fragment>
+
+        <fragment
+            android:id="@+id/historyFragment"
+            android:name="com.example.myapplication.presentation.ui.HistoryFragment"
+            android:label="History" />
+
+        <fragment
+            android:id="@+id/profileFragment"
+            android:name="com.example.myapplication.presentation.ui.ProfileFragment"
+            android:label="Profile" >
+
+            <action
+                android:id="@+id/action_profileFragment_to_settingsFragment"
+                app:destination="@id/settingsFragment" />
+        </fragment>
+
+        <fragment
+            android:id="@+id/settingsFragment"
+            android:name="com.example.myapplication.presentation.ui.SettingsFragment"
+            android:label="Settings"
+            tools:layout="@layout/fragment_settings" />
+
+        <!-- modulesFragment недоступен напрямую из BottomNav, но доступен через action -->
+        <fragment
+            android:id="@+id/modulesFragment"
+            android:name="com.example.myapplication.presentation.ui.CourseModulesFragment"
+            android:label="Course Modules" />
+
+    </navigation>
 
     <fragment
-        android:id="@+id/exploreFragment"
-        android:name="com.example.myapplication.presentation.ui.ExploreFragment"
-        android:label="Explore" />
+        android:id="@+id/authFragment"
+        android:name="com.example.myapplication.presentation.ui.AuthFragment"
+        android:label="Авторизация">
 
-    <fragment
-        android:id="@+id/historyFragment"
-        android:name="com.example.myapplication.presentation.ui.HistoryFragment"
-        android:label="History" />
-
-    <fragment
-        android:id="@+id/profileFragment"
-        android:name="com.example.myapplication.presentation.ui.ProfileFragment"
-        android:label="Profile" />
-
-    <!-- Пример дополнительного экрана
-    <fragment
-        android:id="@+id/detailsFragment"
-        android:name="com.example.myapplication.ui.details.DetailsFragment"
-        android:label="Details" /> -->
+        <!-- Action для перехода после успешной авторизации -->
+        <action
+            android:id="@+id/action_authFragment_to_main_graph"
+            app:destination="@id/main_graph"
+            app:popUpTo="@id/authFragment"
+            app:popUpToInclusive="true"
+            app:launchSingleTop="true" />
+    </fragment>
 
 </navigation>

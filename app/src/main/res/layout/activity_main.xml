@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
     android:background="?attr/colorSurface"
     tools:context=".presentation.MainActivity">
 
@@ -21,15 +22,18 @@
         app:navGraph="@navigation/nav_graph"
         tools:layout="@layout/fragment_explore"/>
 
-    <!-- Нижняя навигация -->
+    <!-- Нижняя навигация app:itemActiveIndicatorStyle="@style/App.BottomNav.ActiveIndicator"
+        -->
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_navigation"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
-        android:background="?attr/colorSurface"
+        android:background="@android:color/transparent"
+        android:elevation="8dp"
         app:labelVisibilityMode="labeled"
-        app:itemIconSize="24dp"
+        app:itemIconSize="32dp"
+        app:itemIconPadding="2dp"
         app:itemIconTint="@color/selector_bottom_nav"
         app:itemTextColor="@color/selector_bottom_nav"
         app:layout_constraintBottom_toBottomOf="parent"

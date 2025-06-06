@@ -9,9 +9,9 @@
     android:background="?attr/colorSurface"
     tools:context="com.example.myapplication.presentation.ui.TodayFragment">
 
-    <!-- Заголовок экрана и иконка уведомлений -->
+    <!-- android:fitsSystemWindows="true"Заголовок экрана и иконка уведомлений -->
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/header_container"
+        android:id="@+id/profile_header_container"
         android:layout_width="0dp"
         android:layout_height="50dp"
         android:background="?attr/colorSurface"

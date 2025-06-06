@@ -14,7 +14,7 @@
 
         <!-- Заголовок поверх -->
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/header_container"
+            android:id="@+id/history_header_container"
             android:layout_width="0dp"
             android:layout_height="50dp"
             android:background="?attr/colorSurface"

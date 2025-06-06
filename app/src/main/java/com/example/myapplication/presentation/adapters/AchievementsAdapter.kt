@@ -1,4 +1,4 @@
-package com.example.myapplication.presentation
+package com.example.myapplication.presentation.adapters
 
 import android.content.res.ColorStateList
 import android.view.LayoutInflater
@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.ImageButton
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.R
+import com.example.myapplication.presentation.Achievement
 
 class AchievementsAdapter(
     private val items: List<Achievement>,

@@ -6,6 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.example.myapplication.R
+import androidx.navigation.fragment.findNavController
+import com.google.android.material.card.MaterialCardView
 
 
 class ExploreFragment : Fragment() {
@@ -14,6 +16,18 @@ class ExploreFragment : Fragment() {
     ): View? {
         return inflater.inflate(R.layout.fragment_explore, container, false)
     }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        val cardLearnMain: MaterialCardView = view.findViewById(R.id.card_learn_main)
+
+        cardLearnMain.setOnClickListener {
+            // Переход по action из nav_graph.xml
+            findNavController().navigate(R.id.action_explore_to_modules)
+        }
+    }
+
 }
 
 

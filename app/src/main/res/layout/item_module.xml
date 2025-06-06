@@ -13,7 +13,7 @@
     app:cardBackgroundColor="?attr/colorSurfaceContainerHigh"
     app:cardCornerRadius="16dp"
     app:cardElevation="2dp"
-    app:rippleColor="?attr/colorPrimaryContainer">
+    app:rippleColor="@color/white_ripple_24_percent">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -41,14 +41,14 @@
         -->
         <ImageView
             android:id="@+id/image_module_status"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
             android:contentDescription="@string/module_status_finished"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:tint="?attr/colorPrimary"
-            tools:src="@drawable/ic_check"
+            app:tint="@color/green_mild"
+            android:src="@drawable/ic_check"
             tools:visibility="gone"/>
 
         <!-- Иконка "В процессе" (например, часы) -->
@@ -61,9 +61,8 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:tint="@color/green_mild"
-            android:visibility="gone"
-            tools:src="@drawable/ic_check"
+            app:tint="?attr/colorPrimary"
+            android:src="@drawable/ic_time"
             tools:visibility="visible"/>
 
         <!-- Заголовок модуля

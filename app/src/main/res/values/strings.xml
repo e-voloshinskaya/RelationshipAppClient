@@ -91,5 +91,11 @@
     <string name="section_practice">Практикуйтесь</string>
     <string name="module_status_finished">Статус прохождения модуля: завершен</string>
     <string name="module_status_in_progress">Статус модуля: в процессе</string>
+    <string name="screen_title_modules">Модули курса</string>
+
+
+    <string name="module_sections_count">%d %s</string>
+    <string name="error_loading_data">Ошибка загрузки данных</string>
+    <string name="back_button_description">Кнопка Назад</string>
 
 </resources>
