@@ -150,7 +150,7 @@ class MainActivity : AppCompatActivity() {
     private fun setupBottomNavVisibility() {
         navController.addOnDestinationChangedListener { _, destination, _ ->
             binding.bottomNavigation.isVisible = when (destination.id) {
-                R.id.authFragment, R.id.splashFragment -> false
+                R.id.authFragment, R.id.splashFragment, R.id.settingsFragment -> false
                 else -> true
             }
         }

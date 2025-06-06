@@ -1,0 +1,12 @@
+<!-- res/drawable/tab_selector.xml -->
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- Правило 1: Если элемент (вкладка) находится в состоянии "выбран",
+         то показать drawable tab_indicator_selected (наш яркий кружок). -->
+    <item android:drawable="@drawable/tab_indicator_selected" android:state_selected="true" />
+
+    <!-- Правило 2: Во всех остальных случаях (по умолчанию)
+         показать drawable tab_indicator_default (наш серый кружок). -->
+    <item android:drawable="@drawable/tab_indicator_default" />
+
+</selector>

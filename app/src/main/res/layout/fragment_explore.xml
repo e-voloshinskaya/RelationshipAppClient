@@ -122,7 +122,15 @@
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
 
-        <!-- 2) Секция: Практикуйтесь -->
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/button_temp_test_navigation"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="ТЕСТ: Открыть экран модуля"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <!-- 2) Секция: Практикуйтесь -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

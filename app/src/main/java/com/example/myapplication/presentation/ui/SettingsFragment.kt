@@ -83,40 +83,48 @@ class SettingsFragment : Fragment() {
             SettingsSection(
                 title = "Аккаунт",
                 items = listOf(
-                    SettingsItem(id = "profile", title = "Профиль", iconResId = R.drawable.ic_bell), //R.drawable.ic_user),
-                    SettingsItem(id = "paired_id", title = "Код для пары", iconResId = R.drawable.ic_bell), //R.drawable.ic_link)
+                    SettingsItem(id = "profile", title = "Профиль", iconResId = R.drawable.ic_user),
+                    SettingsItem(id = "change_password", title = "Изменить пароль", iconResId = R.drawable.ic_user),
+                    SettingsItem(id = "paired_id", title = "Пригласить партнера", iconResId = R.drawable.ic_pair)
                 )
             ),
             SettingsSection(
-                title = "Уведомления",
+                title = "Уведомления и безопасность",
                 items = listOf(
-                    SettingsItem(id = "notifications", title = "Настройки уведомлений", iconResId = R.drawable.ic_bell)
+                    SettingsItem(id = "notifications", title = "Настройки уведомлений", iconResId = R.drawable.ic_bell),
+                    SettingsItem(id = "screen_lock", title = "Пароль на вход", iconResId = R.drawable.ic_lock),
                 )
             ),
             SettingsSection(
                 title = "Помощь",
                 items = listOf(
-                    SettingsItem(id = "help_center", title = "Центр помощи", iconResId = R.drawable.ic_bell), //R.drawable.ic_help),
-                    SettingsItem(id = "contact_us", title = "Связаться с нами", iconResId = R.drawable.ic_bell), //R.drawable.ic_mail),
-                    SettingsItem(id = "crisis_helplines", title = "Линии помощи", iconResId = R.drawable.ic_bell), //R.drawable.ic_support)
+                    SettingsItem(id = "send_feedback", title = "Обратная связь", iconResId = R.drawable.ic_send),
+                    SettingsItem(id = "contact_us", title = "Связаться с поддержкой", iconResId = R.drawable.ic_ask),
+                    SettingsItem(id = "crisis_helplines", title = "Линии и центры помощи", iconResId = R.drawable.ic_sos),
                 )
             ),
             SettingsSection(
                 title = "Документы",
                 items = listOf(
-                    SettingsItem(id = "terms", title = "Условия использования", iconResId = R.drawable.ic_bell), //R.drawable.ic_document),
-                    SettingsItem(id = "privacy", title = "Политика конфиденциальности", iconResId = R.drawable.ic_bell), //R.drawable.ic_privacy),
-                    SettingsItem(id = "legal", title = "Правовая информация", iconResId = R.drawable.ic_bell), //R.drawable.ic_legal)
+                    SettingsItem(id = "terms", title = "Условия использования", iconResId = R.drawable.ic_doc),
+                    SettingsItem(id = "privacy", title = "Политика конфиденциальности", iconResId = R.drawable.ic_policy), //R.drawable.ic_privacy),
+                    //SettingsItem(id = "legal", title = "Правовая информация", iconResId = R.drawable.ic_low), //R.drawable.ic_legal)
                 )
             ),
             SettingsSection(
                 title = "Другое",
                 items = listOf(
-                    SettingsItem(id = "instagram", title = "Подписаться в Instagram", iconResId = R.drawable.ic_bell),
-                    SettingsItem(id = "tiktok", title = "Подписаться в TikTok", iconResId = R.drawable.ic_bell),
-                    SettingsItem(id = "logout", title = "Выйти", iconResId = R.drawable.ic_logout)
+                    SettingsItem(id = "useful", title = "Полезные ссылки", iconResId = R.drawable.ic_stars),
+                )
+            ),
+            SettingsSection(
+                title = "",
+                items = listOf(
+                    SettingsItem(id = "logout", title = "Выйти", iconResId = R.drawable.ic_logout),
+                    SettingsItem(id = "delete_acc", title = "Удалить аккаунт и связанные данные", iconResId = R.drawable.ic_delete_acc),
                 )
             )
+
         )
 
         settingsAdapter.submitSections(settingsSections)

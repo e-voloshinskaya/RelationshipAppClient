@@ -73,7 +73,7 @@ class AuthFragment : Fragment() {
 
     private fun updateUI() {
         if (isSignInMode) {
-            binding.inputLayoutPassword.hint = "hint"// Может быть полезно
+            binding.inputLayoutPassword.hint = "Пароль"// Может быть полезно
             binding.textTitle.text = "Вход в приложение"
             binding.buttonPrimary.text = "Войти"
             binding.textSwitchMode.text = "Нет аккаунта? "
@@ -83,7 +83,7 @@ class AuthFragment : Fragment() {
             binding.buttonPrimary.text = "Создать аккаунт"
             binding.textSwitchMode.text = "Уже есть аккаунт? "
             binding.buttonSwitchMode.text = "Войти"
-            binding.inputLayoutPassword.hint = "hint" // Убедись, что подсказки подходят
+            binding.inputLayoutPassword.hint = "Пароль" // Убедись, что подсказки подходят
         }
         // Сбрасываем текст в полях при смене режима, если нужно
         // binding.inputEmail.text?.clear()

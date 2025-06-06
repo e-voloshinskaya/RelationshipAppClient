@@ -1,0 +1,15 @@
+<!-- res/drawable/tab_indicator_selected.xml -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="oval">
+
+    <!-- Цвет активной точки.
+         ?attr/colorPrimary - это основной акцентный цвет твоего приложения.
+         Он задается в теме (res/values/themes.xml).
+         Можешь заменить на любой конкретный цвет, например, @color/blue_mild -->
+    <solid android:color="?attr/colorPrimary" />
+
+    <!-- Размер точки -->
+    <size
+        android:width="8dp"
+        android:height="8dp" />
+</shape>

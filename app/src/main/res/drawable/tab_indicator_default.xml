@@ -1,0 +1,14 @@
+<!-- res/drawable/tab_indicator_default.xml -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="oval">
+
+    <!-- Цвет неактивной точки.
+         ?attr/colorOnSurfaceVariant - это стандартный, приглушенный цвет текста/иконок,
+         который хорошо подходит для неактивных элементов в Material Design 3.-->
+    <solid android:color="?attr/colorOnSurfaceVariant" />
+
+    <!-- Размер точки -->
+    <size
+        android:width="8dp"
+        android:height="8dp" />
+</shape>

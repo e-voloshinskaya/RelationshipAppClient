@@ -47,6 +47,10 @@
                 android:id="@+id/action_explore_to_modules"
                 app:destination="@id/modulesFragment" />
 
+            <action
+                android:id="@+id/action_exploreFragment_to_moduleStepFragment"
+                app:destination="@id/moduleStepFragment" />
+
         </fragment>
 
         <fragment
@@ -74,7 +78,23 @@
         <fragment
             android:id="@+id/modulesFragment"
             android:name="com.example.myapplication.presentation.ui.CourseModulesFragment"
-            android:label="Course Modules" />
+            android:label="Course Modules">
+
+            <action
+                android:id="@+id/action_modulesFragment_to_moduleStepFragment"
+                app:destination="@id/moduleStepFragment" />
+        </fragment>
+
+        <fragment
+            android:id="@+id/moduleStepFragment"
+            android:name="com.example.myapplication.presentation.ui.ModuleStepFragment"
+            android:label="Module Content"
+            tools:layout="@layout/fragment_module_step" >
+            <!-- Этот аргумент мы будем передавать в будущем, когда переход будет "настоящим" -->
+            <argument
+                android:name="MODULE_ID"
+                app:argType="string" />
+        </fragment>
 
     </navigation>
 
