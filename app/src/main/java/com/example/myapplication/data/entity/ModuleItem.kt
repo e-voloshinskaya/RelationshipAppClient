@@ -28,18 +28,3 @@ data class ModuleItem(
     @kotlinx.serialization.Transient
     val status: ModuleStatus = ModuleStatus.NO_STATUS, // По умолчанию все "в процессе"
 )
-
-
-/*
-@Serializable
-data class ModuleItem(
-    val module_id: String,
-    val m_title: String,
-    val description: String,
-    val order_idx: Int,
-
-    // Эти поля не из Supabase, они вычисляются/добавляются позже
-    val sectionCount: Int = 0,
-    val isCompleted: Boolean = false
-)
- */

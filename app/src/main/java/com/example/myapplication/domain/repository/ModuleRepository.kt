@@ -10,5 +10,5 @@ interface ModuleRepository {
      *         либо исключение при ошибке.
      */
     suspend fun getModules(): Result<List<ModuleItem>>
-
+    suspend fun getModulesWithStatus(): List<ModuleItem>
 }

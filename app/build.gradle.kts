@@ -56,6 +56,7 @@ dependencies {
     implementation(libs.androidx.constraintlayout)
     implementation (libs.androidx.swiperefreshlayout)
     implementation (libs.androidx.recyclerview)
+    implementation (libs.circleimageview)
 
     // Navigation Component
     implementation(libs.androidx.navigation.fragment.ktx)

@@ -2,11 +2,14 @@ package com.example.myapplication.data.repository
 
 import android.util.Log
 import com.example.myapplication.data.entity.ModuleItem
+import com.example.myapplication.data.entity.ModuleStatus
 import com.example.myapplication.domain.repository.ModuleRepository
 import io.github.jan.supabase.postgrest.Postgrest
 import io.github.jan.supabase.postgrest.query.Order
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 
 /**
  * Реализация интерфейса ModuleRepository, использующая Supabase PostgREST для получения данных.
@@ -14,6 +17,15 @@ import kotlinx.coroutines.withContext
  * @param postgrest Клиент для взаимодействия с базой данных PostgREST в Supabase.
  *                  Передается как зависимость для гибкости и тестируемости.
  */
+
+@Serializable
+private data class ModuleWithStatusDto(
+    @SerialName("module_id") val id: String,
+    @SerialName("m_title") val title: String,
+    @SerialName("sections_count") val sectionsCount: Int,
+    @SerialName("status") val statusString: String
+)
+
 class ModuleRepositoryImpl(private val postgrest: Postgrest) : ModuleRepository {
 
     // Ключевое слово 'override' означает, что мы реализуем метод из интерфейса ModuleRepository.
@@ -48,6 +60,28 @@ class ModuleRepositoryImpl(private val postgrest: Postgrest) : ModuleRepository 
                 // В случае ошибки, возвращаем исключение, обернутое в Result.failure
                 Result.failure(e)
             }
+        }
+    }
+
+    override suspend fun getModulesWithStatus(): List<ModuleItem> {
+        Log.d("ModuleRepository", "Запрашиваю модули со статусом через RPC...")
+
+        val dtos = postgrest.rpc(
+            function = "get_modules_with_user_status" // Вызываем нашу новую функцию
+        ).decodeList<ModuleWithStatusDto>()
+
+        return dtos.map { dto ->
+            val statusEnum = when (dto.statusString) {
+                "completed" -> ModuleStatus.COMPLETED
+                "in_progress" -> ModuleStatus.IN_PROGRESS
+                else -> ModuleStatus.NO_STATUS
+            }
+            ModuleItem(
+                id = dto.id,
+                title = dto.title,
+                sectionsCount = dto.sectionsCount,
+                status = statusEnum
+            )
         }
     }
 }

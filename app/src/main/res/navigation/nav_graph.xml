@@ -50,8 +50,8 @@
 
             <!-- ТЕСТ ТЕСТ ТЕСТ ТЕСТ -->
             <action
-                android:id="@+id/action_exploreFragment_to_moduleStepFragment"
-                app:destination="@id/moduleStepFragment" />
+                android:id="@+id/action_exploreFragment_to_pairingFragment"
+                app:destination="@id/pairingFragment" />
 
         </fragment>
 
@@ -59,6 +59,11 @@
             android:id="@+id/historyFragment"
             android:name="com.example.myapplication.presentation.ui.HistoryFragment"
             android:label="History" />
+
+        <fragment
+            android:id="@+id/pairingFragment"
+            android:name="com.example.myapplication.presentation.ui.PairingFragment"
+            android:label="Pairing" />
 
         <fragment
             android:id="@+id/profileFragment"

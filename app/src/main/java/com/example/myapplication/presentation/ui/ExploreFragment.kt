@@ -34,12 +34,12 @@ class ExploreFragment : Fragment() {
             findNavController().navigate(R.id.action_explore_to_courseModules)
         }
 
-        /* ТЕСТ ТЕСТ ТЕСТ
+        /* ТЕСТ ТЕСТ ТЕСТ */
         binding.buttonTempTestNavigation.setOnClickListener {
             // Здесь мы вызываем action, который только что создали в nav_graph
-            findNavController().navigate(R.id.action_exploreFragment_to_moduleStepFragment)
+            findNavController().navigate(R.id.action_exploreFragment_to_pairingFragment)
         }
-         */
+
     }
 
     override fun onDestroyView() {

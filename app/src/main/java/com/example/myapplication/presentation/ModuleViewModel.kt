@@ -1,5 +1,6 @@
 package com.example.myapplication.presentation
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -39,9 +40,25 @@ class ModuleViewModel(
     // Блок init выполняется один раз при создании ViewModel.
     // Мы сразу же запускаем загрузку модулей.
     init {
-        loadModules()
+        loadModulesWithStatus() // Вызываем новый метод при инициализации
     }
 
+
+    // НОВЫЙ МЕТОД ЗАГРУЗКИ
+    private fun loadModulesWithStatus() {
+        _uiState.value = ModulesUiState.Loading
+        viewModelScope.launch {
+            try {
+                // Вызываем новый метод репозитория
+                val modules = moduleRepository.getModulesWithStatus()
+                _uiState.postValue(ModulesUiState.Success(modules))
+                Log.d("ModuleViewModel", "Успешно загружены модули со статусами: ${modules.size} шт.")
+            } catch (e: Exception) {
+                _uiState.postValue(ModulesUiState.Error(e.message ?: "Ошибка загрузки"))
+                Log.e("ModuleViewModel", "Ошибка при загрузке модулей со статусами", e)
+            }
+        }
+    }
     /**
      * Запускает процесс загрузки модулей из репозитория.
      * Эту функцию можно будет позже вызывать для обновления списка (например, pull-to-refresh).
