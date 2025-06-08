@@ -76,7 +76,6 @@ class HistoryFragment : Fragment() {
     }
 
     private fun observeViewModel() {
-        // --- ИСПРАВЛЕННАЯ ЛОГИКА ---
         // Подписываемся на `uiState` из ViewModel, который мы создали
         viewModel.uiState.observe(viewLifecycleOwner) { state ->
             // Сначала скрываем все состояния

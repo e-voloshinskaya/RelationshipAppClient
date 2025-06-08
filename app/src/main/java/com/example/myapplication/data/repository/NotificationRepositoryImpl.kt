@@ -37,7 +37,7 @@ class NotificationRepositoryImpl {
 
         // Создаем flow для INSERT событий БЕЗ фильтра
         val flow = channel.postgresChangeFlow<PostgresAction.Insert>(schema = "public") {
-            table = "notifications"
+            table = "Notifications"
             // Убираем filter отсюда
         }
 
@@ -66,7 +66,7 @@ class NotificationRepositoryImpl {
             ?: throw IllegalStateException("User not authenticated")
 
         val response = client.postgrest
-            .from("notifications")
+            .from("Notifications")
             .select() {
                 filter {
                     eq("recipient_id", userId)
@@ -85,7 +85,7 @@ class NotificationRepositoryImpl {
             ?: throw IllegalStateException("User not authenticated")
 
         val response = client.postgrest
-            .from("notifications")
+            .from("Notifications")
             .select(columns = Columns.list("id")) {
                 filter {
                     eq("recipient_id", userId)
@@ -103,7 +103,7 @@ class NotificationRepositoryImpl {
             ?: throw IllegalStateException("User not authenticated")
 
         client.postgrest
-            .from("notifications")
+            .from("Notifications")
             .update(
                 {
                     set("is_read", true)
@@ -119,7 +119,7 @@ class NotificationRepositoryImpl {
     // Пометить конкретное уведомление как прочитанное
     suspend fun markAsRead(notificationId: String) {
         client.postgrest
-            .from("notifications")
+            .from("Notifications")
             .update(
                 {
                     set("is_read", true)

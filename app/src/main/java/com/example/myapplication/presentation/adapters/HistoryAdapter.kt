@@ -22,11 +22,11 @@ class HistoryAdapter(
         fun bind(item: HistoryItem) {
             binding.textHistoryItemTitle.text = item.title
             binding.textHistoryItemDatetime.text = item.completedAt
-            binding.textHistoryItemSubtype.text = "Практика" // Здесь можно добавить логику для типа
+            binding.textHistoryItemSubtype.text = "Практика"
 
             // --- Логика отображения галочек ---
 
-            // Твоя галочка (всегда видна и закрашена)
+            // галочка пользователя (всегда видна и закрашена)
             binding.iconCheckmarkUser1.isVisible = true
             binding.iconCheckmarkUser1.setColorFilter(
                 ContextCompat.getColor(itemView.context, R.color.blue_mild) // Твой цвет

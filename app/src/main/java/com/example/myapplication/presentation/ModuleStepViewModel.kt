@@ -132,20 +132,7 @@ class ModuleStepViewModel(
                     Log.e("ModuleStepVM", "Ошибка сохранения теории", e)
                 }
             }
-            /*
-            is TheoryItem -> {
-                // Логика для теории
-                val theoryId = currentItem.details?.theoryId ?: return
-                try {
-                    supabase.from("User_Theory_Progress").upsert(
-                        UserTheoryProgress(userId = currentUser.id, theoryId = theoryId,
-                            isCompleted = true))
-                        { onConflict = "user_id,theory_id" }
-                    Log.i("ModuleStepVM", "Прогресс по теории '$theoryId' сохранен.")
-                } catch (e: Exception) {
-                    Log.e("ModuleStepVM", "Ошибка сохранения теории", e)
-                }
-            } */
+
             is TestItem -> {
                 // Если мы завершаем тест, ID попытки должен уже существовать.
                 // Если его нет (произошла ошибка при создании) или нет ответов, выходим.

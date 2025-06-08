@@ -28,5 +28,4 @@ interface PairingCodeRepository {
     suspend fun deleteLink(): Result<Unit>
 
     suspend fun getPairingStatus(): PairingUiState
-    // TODO: Другие методы, которые понадобятся позже
 }

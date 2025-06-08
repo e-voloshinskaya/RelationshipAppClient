@@ -45,7 +45,6 @@
             android:layout_height="36dp"
             android:contentDescription="@string/notification"
             app:icon="@drawable/ic_bell"
-            app:iconTint="?attr/colorOnSurfaceVariant"
             android:text=""
             app:iconSize="30dp"
             android:padding="0dp"

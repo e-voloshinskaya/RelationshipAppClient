@@ -18,9 +18,8 @@ class ModuleStepViewModelFactory(
         if (modelClass.isAssignableFrom(ModuleStepViewModel::class.java)) {
             // Создаем и возвращаем экземпляр ViewModel
             return ModuleStepViewModel(
-                // Клиент берем из твоего синглтона
                 supabase = SupabaseInit.client,
-                // А moduleId передаем тот, что получили в конструкторе фабрики
+                // moduleId передаем тот, что получили в конструкторе фабрики
                 moduleId = moduleId
             ) as T
         }

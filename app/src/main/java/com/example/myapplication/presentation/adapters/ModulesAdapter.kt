@@ -10,14 +10,14 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.R
 import com.example.myapplication.data.entity.ModuleItem
 import com.example.myapplication.data.entity.ModuleStatus
-import com.example.myapplication.databinding.ItemModuleBinding // Важно: имя генерируется из твоего layout-файла
+import com.example.myapplication.databinding.ItemModuleBinding
 
 // Используем ListAdapter для автоматизации и производительности
 class ModulesAdapter(
     private val onModuleClicked: (ModuleItem) -> Unit
 ) : ListAdapter<ModuleItem, ModulesAdapter.ModuleViewHolder>(ModuleDiffCallback()) {
 
-    // ViewHolder будет хранить ссылки на view из твоего layout
+    // ViewHolder будет хранить ссылки на view из layout
     inner class ModuleViewHolder(private val binding: ItemModuleBinding) : RecyclerView.ViewHolder(binding.root) {
 
         fun bind(moduleItem: ModuleItem) {

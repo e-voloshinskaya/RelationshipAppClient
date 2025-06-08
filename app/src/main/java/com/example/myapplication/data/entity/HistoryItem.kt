@@ -12,12 +12,11 @@ data class HistoryItemDto(
     @SerialName("partner_completed_at") val partnerCompletedAt: String?
 )
 
-// А это модель, с которой будет работать твой UI (адаптер)
 data class HistoryItem(
     val attemptId: String,
     val testId: String,
     val title: String,
-    val completedAt: String, // Дата твоего прохождения
+    val completedAt: String, // Дата прохождения
     val userStatus: CompletionStatus,
     val partnerStatus: CompletionStatus
 )

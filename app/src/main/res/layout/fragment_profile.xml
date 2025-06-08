@@ -177,7 +177,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:gravity="center"
-                            android:text="@string/together_for"
+                            android:text="-"
                             android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
                             android:textColor="@color/colorOnSurface"
                             android:textSize="16sp" />

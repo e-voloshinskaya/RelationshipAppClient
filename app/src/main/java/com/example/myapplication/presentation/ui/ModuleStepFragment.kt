@@ -71,7 +71,7 @@ class ModuleStepFragment : Fragment() {
         }
 
         binding.toolbar.setNavigationOnClickListener { findNavController().navigateUp() }
-        // binding.buttonMoreOptions.setOnClickListener { showOptionsMenu(it) } // Раскомментируй, когда добавишь меню
+        // binding.buttonMoreOptions.setOnClickListener { showOptionsMenu(it) }
         binding.emptyStateRetryButton.setOnClickListener { viewModel.retryLoadContent() }
     }
 

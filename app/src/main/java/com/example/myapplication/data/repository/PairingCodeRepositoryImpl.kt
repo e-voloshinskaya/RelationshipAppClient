@@ -116,7 +116,6 @@ class PairingCodeRepositoryImpl(
         repeat(10) {
             val code = generateUserPrefix(userId) + "-" + generateRandomSuffix()
 
-            // --- ИСПРАВЛЕНИЕ ЗДЕСЬ ---
             // Мы просто запрашиваем один столбец. Нам не важны данные, только факт их наличия.
             val result = client.postgrest.from("PairingCodes")
                 .select(columns = Columns.list("code_id")) { // Выбираем любую колонку, например, code_id

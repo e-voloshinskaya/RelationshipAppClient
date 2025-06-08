@@ -39,7 +39,7 @@ class ModuleRepositoryImpl(private val postgrest: Postgrest) : ModuleRepository 
 
                 // Выполняем запрос к таблице "Modules" в Supabase
                 val modules = postgrest
-                    .from("Modules") // Имя твоей таблицы в PostgreSQL
+                    .from("Modules")
                     .select {
                         // Сортируем результат по колонке "order_idx" в порядке возрастания (ASC)
                         order("order_idx", Order.ASCENDING)
@@ -85,56 +85,3 @@ class ModuleRepositoryImpl(private val postgrest: Postgrest) : ModuleRepository 
         }
     }
 }
-
-/*
-package com.example.myapplication.data.repository
-
-import com.example.myapplication.SupabaseInit
-import com.example.myapplication.domain.repository.ModuleRepository
-import com.example.myapplication.model.Module
-import io.github.jan.supabase.postgrest.postgrest
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.withContext
-
-class ModuleRepositoryImpl : ModuleRepository {
-
-    override suspend fun getAllModules(): List<Module> = withContext(Dispatchers.IO) {
-        val client = SupabaseInit.supabaseClient
-
-        val modulesResponse = client
-            .postgrest["Modules"]
-            .select()
-            .decodeList<Map<String, Any>>() // Или сделай DTO
-
-        // Получаем блоки, чтобы посчитать количество
-        val blocksResponse = client
-            .postgrest["TheoryBlocks"]
-            .select()
-            .decodeList<Map<String, Any>>()
-
-        // позже — можно заменить на DTO, если потребуется
-
-        modulesResponse.map { module ->
-            val id = module["module_id"] as String
-            val title = module["m_title"] as String
-            val description = module["description"] as String
-
-            // считаем количество блоков
-            val sectionCount = blocksResponse.count {
-                it["module_id"] == id
-            }
-
-            // Прогресс — временно говорим "завершен", если все блоки есть
-            val isCompleted = sectionCount > 0 && Math.random() > 0.5 // TODO: заменить на данные о пользователе
-
-            Module(
-                id = id,
-                title = title,
-                description = description,
-                sectionCount = sectionCount,
-                isCompleted = isCompleted
-            )
-        }
-    }
-}
- */

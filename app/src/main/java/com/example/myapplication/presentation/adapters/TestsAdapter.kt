@@ -20,7 +20,7 @@ import android.widget.RadioButton
  */
 class TestsAdapter(
     private val questions: List<Question>,
-    // НОВЫЕ ПАРАМЕТРЫ: функции для передачи ответов "наружу" во ViewModel
+    // функции для передачи ответов "наружу" во ViewModel
     private val onOptionSelected: (questionId: String, optionId: String) -> Unit,
     private val onFreeTextChanged: (questionId: String, text: String) -> Unit
 ) : RecyclerView.Adapter<TestsAdapter.QuestionViewHolder>() {
@@ -84,7 +84,7 @@ class TestsAdapter(
                 }
 
                 "multiple_choice" -> {
-                    // Логика для множественного выбора (пока заглушка)
+                    // Логика для множественного выбора
                     binding.llMultipleChoice.isVisible = true
                     question.options?.forEach { option ->
                         val checkBox = MaterialCheckBox(itemView.context).apply {
