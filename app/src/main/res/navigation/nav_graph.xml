@@ -53,6 +53,10 @@
                 android:id="@+id/action_exploreFragment_to_pairingFragment"
                 app:destination="@id/pairingFragment" />  -->
 
+            <action
+                android:id="@+id/action_exploreFragment_to_notificationsFragment"
+                app:destination="@id/notificationsFragment" />
+
         </fragment>
 
         <fragment
@@ -64,6 +68,12 @@
             android:id="@+id/pairingFragment"
             android:name="com.example.myapplication.presentation.ui.PairingFragment"
             android:label="Pairing" />
+
+        <fragment
+            android:id="@+id/notificationsFragment"
+            android:name="com.example.myapplication.presentation.ui.NotificationsFragment"
+            android:label="Уведомления"
+            tools:layout="@layout/fragment_notifications" />
 
         <fragment
             android:id="@+id/profileFragment"

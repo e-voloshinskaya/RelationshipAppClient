@@ -80,6 +80,8 @@ dependencies {
     implementation(libs.functions.kt)
     implementation(libs.ktor.client.android)
     implementation(libs.kotlinx.serialization.json)
+    implementation(libs.ktor.client.okhttp)
+    implementation(libs.ktor.client.websockets)
 
     // Firebase Google
     implementation(platform(libs.firebase.bom))
