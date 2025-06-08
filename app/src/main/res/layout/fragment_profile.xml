@@ -147,7 +147,7 @@
                             android:contentDescription="@string/partner_pic"
                             android:padding="16dp"
                             android:scaleType="centerInside"
-                            android:src="@drawable/ic_add"
+                            android:src="@drawable/ic_man"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toEndOf="@id/ampersand"
@@ -254,55 +254,55 @@
                         android:id="@+id/achievement_1"
                         android:layout_width="48dp"
                         android:layout_height="48dp"
-                        android:layout_marginEnd="24dp"
+                        android:layout_marginEnd="32dp"
                         android:background="@drawable/circle_background"
-                        android:backgroundTint="@color/purple_mild"
+                        android:backgroundTint="@color/focus_bar_color"
                         android:contentDescription="@string/cd_mood_terrible"
                         android:scaleType="centerInside"
-                        app:srcCompat="@drawable/ic_awful" />
+                        app:srcCompat="@drawable/ic_walk" />
 
                     <ImageView
                         android:id="@+id/achievement_2"
                         android:layout_width="48dp"
                         android:layout_height="48dp"
-                        android:layout_marginEnd="24dp"
+                        android:layout_marginEnd="28dp"
                         android:background="@drawable/circle_background"
-                        android:backgroundTint="@color/red_mild"
+                        android:backgroundTint="@color/focus_bar_color"
                         android:contentDescription="@string/cd_mood_bad"
                         android:scaleType="centerInside"
-                        app:srcCompat="@drawable/ic_sad" />
+                        app:srcCompat="@drawable/ic_night" />
 
                     <ImageView
                         android:id="@+id/achievement_3"
                         android:layout_width="48dp"
                         android:layout_height="48dp"
-                        android:layout_marginEnd="24dp"
+                        android:layout_marginEnd="32dp"
                         android:background="@drawable/circle_background"
-                        android:backgroundTint="@color/yellow_mild"
+                        android:backgroundTint="@color/focus_bar_color"
                         android:contentDescription="@string/cd_mood_ok"
                         android:scaleType="centerInside"
-                        app:srcCompat="@drawable/ic_ok" />
+                        app:srcCompat="@drawable/ic_book_open" />
 
                     <ImageView
                         android:id="@+id/achievement_4"
                         android:layout_width="48dp"
                         android:layout_height="48dp"
-                        android:layout_marginEnd="24dp"
+                        android:layout_marginEnd="32dp"
                         android:background="@drawable/circle_background"
-                        android:backgroundTint="@color/green_mild"
+                        android:backgroundTint="@color/focus_bar_color"
                         android:contentDescription="@string/cd_mood_good"
                         android:scaleType="centerInside"
-                        app:srcCompat="@drawable/ic_happy" />
+                        app:srcCompat="@drawable/ic_fast" />
 
                     <ImageView
                         android:id="@+id/achievement_5"
                         android:layout_width="48dp"
                         android:layout_height="48dp"
                         android:background="@drawable/circle_background"
-                        android:backgroundTint="@color/blue_mild"
+                        android:backgroundTint="@color/focus_bar_color"
                         android:contentDescription="@string/cd_mood_great"
                         android:scaleType="centerInside"
-                        app:srcCompat="@drawable/ic_great" />
+                        app:srcCompat="@drawable/ic_pair" />
                 </LinearLayout>
             </LinearLayout>
 
@@ -478,7 +478,7 @@
                                 android:background="@drawable/bg_stat_purple"
                                 android:gravity="center"
                                 android:padding="4dp"
-                                android:text="3"
+                                android:text="-"
                                 android:textAppearance="?attr/textAppearanceTitleMedium"
                                 android:textColor="@color/colorOnSurface" />
 
@@ -522,7 +522,7 @@
                                 android:contentDescription="@string/act_partner_pic"
                                 android:padding="4dp"
                                 android:scaleType="centerCrop"
-                                android:src="@drawable/ic_add" />
+                                android:src="@drawable/ic_man" />
 
                             <TextView
                                 android:layout_width="0dp"
@@ -561,148 +561,7 @@
                     </LinearLayout>
                 </com.google.android.material.card.MaterialCardView>
             </LinearLayout>
-
-            <!-- Секция: Важные даты -->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:paddingTop="16dp"
-                android:paddingBottom="16dp">
-
-                <!-- Первая строка: Заголовок-->
-                <TextView
-                    android:id="@+id/section_title_dates"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/special_dates"
-                    android:textAppearance="?attr/textAppearanceTitleMedium"
-                    android:textColor="?attr/colorOnSurface"
-                    android:layout_marginBottom="8dp"/>
-
-                <!-- Важная дата (Карточка) -->
-                <com.google.android.material.card.MaterialCardView
-                    android:id="@+id/date_1"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginBottom="8dp"
-                    app:cardCornerRadius="12dp"
-                    app:cardElevation="2dp">
-
-                <!-- Используем ConstraintLayout для правильного позиционирования -->
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"> <!-- Этот ConstraintLayout будет оборачивать контент -->
-
-                <!-- Цветная полоска (привязана к высоте родительского ConstraintLayout) -->
-                <View
-                    android:id="@+id/color_bar"
-                    android:layout_width="6dp"
-                    android:layout_height="0dp"
-                    android:background="@color/green_mild"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"/>
-
-                <!-- FrameLayout (содержит Основной контент и Кнопку редактирования) -->
-                <FrameLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toEndOf="@id/color_bar"
-                    app:layout_constraintEnd_toEndOf="parent">
-
-                <!-- Основной горизонтальный контент (LinearLayout остается прежним) -->
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal"
-                    android:paddingStart="16dp"
-                    android:paddingEnd="48dp">
-
-                <!-- Квадрат с датой слева (TextView остается прежним) -->
-                <TextView
-                    android:id="@+id/date_square"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="0dp"
-                    android:background="@drawable/bg_rounded_coloured"
-                    android:layout_marginEnd="16dp"
-                    android:gravity="center"
-                    android:minWidth="56dp"
-                    android:minHeight="56dp"
-                    android:text="@string/date_date"
-                    android:textAlignment="center"
-                    android:textColor="@android:color/white"
-                    android:textSize="16sp"
-                    android:textStyle="bold" />
-
-                <!-- Контент и дата (LinearLayout остается прежним) -->
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:orientation="vertical"
-                    android:padding="16dp">
-
-                    <TextView
-                        android:id="@+id/date_title_1"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="4dp"
-                        android:text="@string/marriage_date"
-                        android:textAppearance="?attr/textAppearanceTitleSmall"
-                        android:textColor="?attr/colorOnSurface" />
-
-                    <!-- Когда: через сколько времени -->
-                    <TextView
-                        android:id="@+id/text_tasks_status"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
-                        android:background="@drawable/bg_rounded_coloured"
-                        android:paddingStart="12dp"
-                        android:paddingTop="4dp"
-                        android:paddingEnd="12dp"
-                        android:paddingBottom="4dp"
-                        android:text="@string/in_9"
-                        android:textAppearance="?attr/textAppearanceBodyMedium"
-                        android:textColor="@android:color/white" />
-                </LinearLayout>
-            </LinearLayout>
-
-            <!-- Кнопка редактирования даты -->
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/button_edit_date"
-                style="@style/Widget.App.Button.IconButton.Circular"
-                android:layout_width="32dp"
-                android:layout_height="32dp"
-                android:layout_gravity="top|end"
-                android:layout_margin="8dp"
-                android:padding="4dp"
-                android:contentDescription="@string/edit"
-                app:icon="@drawable/ic_edit"
-                app:iconTint="?attr/colorOnSurface"
-                app:iconSize="24dp"/>
-
-        </FrameLayout>
-</androidx.constraintlayout.widget.ConstraintLayout>
-    </com.google.android.material.card.MaterialCardView>
-
-<com.google.android.material.button.MaterialButton
-    android:id="@+id/button_add_date"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_gravity="center"
-    android:layout_marginTop="8dp"
-    android:text="@string/add_spec_date"
-    android:textAppearance="?attr/textAppearanceLabelLarge"
-    app:backgroundTint="@color/purple_mild" />
-
-            </LinearLayout>
+            <!-- ДАТЫ-->
             <!-- Дополнительное пространство в конце для прокрутки над bottom nav -->
             <!-- Высоту лучше привязать к реальной высоте BottomNavigationView или использовать fitSystemWindows -->
                 <View

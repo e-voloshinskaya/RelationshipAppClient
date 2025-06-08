@@ -37,6 +37,24 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"/>
 
+        <!-- Иконка Уведомления -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/icon_notifications_explore"
+            style="@style/Widget.App.Button.IconButton.Circular"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:contentDescription="@string/notification"
+            app:icon="@drawable/ic_bell"
+            app:iconTint="?attr/colorOnSurfaceVariant"
+            android:text=""
+            app:iconSize="30dp"
+            android:padding="0dp"
+            app:iconPadding="0dp"
+            app:iconGravity="textStart"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 
@@ -121,14 +139,14 @@
                     android:gravity="center"/>
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
-            <!-- ТЕСТ ТЕСТ ТЕСТ -->
+            <!-- ТЕСТ ТЕСТ ТЕСТ
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/button_temp_test_navigation"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="ТЕСТ: Открыть экран связи"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintStart_toStartOf="parent" />
+                app:layout_constraintStart_toStartOf="parent" /> -->
 
             <!-- 2) Секция: Практикуйтесь -->
         <LinearLayout

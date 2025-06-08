@@ -48,10 +48,10 @@
                 app:destination="@id/courseModulesFragment" />
 
 
-            <!-- ТЕСТ ТЕСТ ТЕСТ ТЕСТ -->
+            <!-- ТЕСТ ТЕСТ ТЕСТ ТЕСТ
             <action
                 android:id="@+id/action_exploreFragment_to_pairingFragment"
-                app:destination="@id/pairingFragment" />
+                app:destination="@id/pairingFragment" />  -->
 
         </fragment>
 
@@ -79,7 +79,11 @@
             android:id="@+id/settingsFragment"
             android:name="com.example.myapplication.presentation.ui.SettingsFragment"
             android:label="Settings"
-            tools:layout="@layout/fragment_settings" />
+            tools:layout="@layout/fragment_settings">
+            <action
+                android:id="@+id/action_settingsFragment_to_pairingFragment"
+                app:destination="@id/pairingFragment" />
+        </fragment>
 
         <!-- modulesFragment недоступен напрямую из BottomNav, но доступен через action -->
         <fragment

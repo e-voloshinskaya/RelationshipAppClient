@@ -10,10 +10,14 @@ import io.github.jan.supabase.postgrest.from
 import io.github.jan.supabase.postgrest.postgrest
 import io.github.jan.supabase.postgrest.query.Columns
 import io.github.jan.supabase.postgrest.query.Count
+import kotlinx.serialization.json.buildJsonObject
+import kotlinx.serialization.json.put
 import kotlinx.datetime.Clock
 import kotlinx.datetime.Instant
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
+import kotlinx.serialization.json.JsonElement
+import kotlinx.serialization.json.jsonPrimitive
 import java.security.MessageDigest
 import java.util.Locale
 import kotlin.random.Random
@@ -74,9 +78,36 @@ class PairingCodeRepositoryImpl(
         return newCode
     }
 
+
     override suspend fun usePairingCode(code: String): PairingResult {
-        // Эту логику реализуем на следующем шаге
-        TODO("Not yet implemented")
+        return try {
+            // Создаем JSON-объект для передачи параметров
+            val params = buildJsonObject {
+                put("partner_code", code)
+            }
+            // Вызываем rpc, передавая параметры как JsonObject
+            val responseElement = client.postgrest.rpc(
+                function = "use_pairing_code",
+                parameters = params
+            ).decodeAs<JsonElement>() // decodeAs<JsonElement>() есть во всех версиях
+
+            // 2. Преобразуем JsonElement в простую строку
+            val resultString = responseElement.jsonPrimitive.content
+
+            // 3. Анализируем ответ (этот блок остается без изменений)
+            when (resultString) {
+                "success" -> PairingResult.Success
+                "code_not_found" -> PairingResult.Error("Код не найден")
+                "code_expired" -> PairingResult.Error("Срок действия кода истек")
+                "code_used" -> PairingResult.Error("Этот код уже был использован")
+                "self_pairing" -> PairingResult.Error("Нельзя создать пару с самим собой")
+                "already_paired" -> PairingResult.Error("Один из пользователей уже состоит в паре")
+                else -> PairingResult.Error("Произошла неизвестная ошибка: $resultString")
+            }
+        } catch (e: Exception) {
+            Log.e("PairingRepo", "Ошибка при использовании кода", e)
+            PairingResult.Error(e.message ?: "Ошибка сети")
+        }
     }
 
     // Приватные методы для генерации кода
@@ -138,16 +169,23 @@ class PairingCodeRepositoryImpl(
         @SerialName("partner_avatar") val partnerAvatar: String? = null
     )
 
-    // РЕАЛИЗАЦИЯ НЕДОСТАЮЩЕЙ ФУНКЦИИ
     override suspend fun getPairingStatus(): PairingUiState {
         return try {
-            // Вызываем SQL-функцию, которую мы создали ранее
+            // Используем decodeSingleOrNull, чтобы безопасно обработать случай, когда функция ничего не возвращает
             val dto = client.postgrest.rpc("get_user_pairing_status")
-                .decodeSingle<PairingStatusDto>()
+                .decodeSingleOrNull<PairingStatusDto>()
 
-            // В зависимости от ответа от сервера, возвращаем нужный объект состояния
+            if (dto == null) {
+                // Если функция вернула NULL (потому что не нашла записей в Links),
+                // это значит, что у пользователя нет связи.
+                Log.d("PairingRepo", "RPC get_user_pairing_status не вернула записей. Статус: no_link")
+                return PairingUiState.NoLink(getOrCreateCode())
+            }
+
+            // Если DTO не null, обрабатываем его
+            Log.d("PairingRepo", "Получен статус от RPC: ${dto.status}")
             when (dto.status) {
-                "no_link" -> PairingUiState.NoLink(getOrCreateCode()) // Если нет связи, заодно получаем код
+                "no_link" -> PairingUiState.NoLink(getOrCreateCode())
                 "request_sent" -> PairingUiState.RequestSent(dto.partnerName)
                 "request_received" -> PairingUiState.RequestReceived(dto.partnerName)
                 "linked" -> PairingUiState.Linked(dto.partnerName, dto.partnerAvatar)

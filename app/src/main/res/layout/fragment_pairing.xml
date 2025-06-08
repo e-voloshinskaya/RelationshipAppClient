@@ -7,14 +7,16 @@
     android:background="?attr/colorSurface"
     tools:context=".presentation.ui.PairingFragment">
 
-    <!-- Основной контейнер, который мы скрываем во время загрузки -->
+    <!-- Состояние 1: НЕТ СВЯЗИ (ScrollView с двумя карточками) -->
     <ScrollView
-        android:id="@+id/content_container"
+        android:id="@+id/noLinkContent"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="0dp"
         android:clipToPadding="false"
         android:paddingBottom="32dp"
-        android:visibility="visible"
+        android:visibility="gone"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
         tools:visibility="visible">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -111,14 +113,13 @@
                             android:textStyle="bold"/>
                     </LinearLayout>
 
-                    <!-- Место для кода. Здесь можно использовать отдельные TextView -->
                     <TextView
                         android:id="@+id/your_code_text"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_horizontal"
                         android:layout_marginTop="8dp"
-                        android:letterSpacing="0.2"
+                        android:letterSpacing="0.1"
                         android:textAppearance="@style/TextAppearance.AppCompat.Display1"
                         android:textColor="?attr/colorOnSurface"
                         android:textStyle="bold"
@@ -143,7 +144,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="или"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="24dp"
                 android:textAppearance="?attr/textAppearanceTitleMedium"
                 android:textStyle="bold"
                 app:layout_constraintTop_toBottomOf="@id/invite_card"
@@ -158,7 +159,7 @@
                 app:cardBackgroundColor="#FFD8E4"
                 app:cardCornerRadius="16dp"
                 app:cardElevation="0dp"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="24dp"
                 app:layout_constraintEnd_toEndOf="@id/invite_card"
                 app:layout_constraintStart_toStartOf="@id/invite_card"
                 app:layout_constraintTop_toBottomOf="@id/or_divider">
@@ -177,7 +178,6 @@
                         android:textColor="?attr/colorOnSurface"
                         android:textStyle="bold"/>
 
-                    <!-- Здесь нужно будет использовать кастомный View для ввода кода или просто EditText -->
                     <com.google.android.material.textfield.TextInputLayout
                         android:id="@+id/partner_code_input_layout"
                         android:layout_width="match_parent"
@@ -207,145 +207,147 @@
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
-            <!-- Состояние: Запрос отправлен -->
-            <LinearLayout
-                android:id="@+id/request_sent_content"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:gravity="center"
-                android:padding="24dp"
-                android:layout_marginTop="32dp"
-                android:visibility="gone"
-                tools:visibility="visible"
-                app:layout_constraintTop_toBottomOf="@id/subtitle_text"
-                app:layout_constraintStart_toStartOf="@id/subtitle_text"
-                app:layout_constraintEnd_toEndOf="@id/subtitle_text">
-
-                <TextView
-                    android:id="@+id/request_sent_text"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textAlignment="center"
-                    android:textAppearance="?attr/textAppearanceTitleMedium"
-                    tools:text="Приглашение отправлено пользователю Имярек. Ожидание ответа..."/>
-
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/cancel_request_button"
-                    style="?attr/materialButtonOutlinedStyle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="24dp"
-                    android:text="Отменить запрос"/>
-            </LinearLayout>
-
-            <!-- Состояние: Запрос получен -->
-            <LinearLayout
-                android:id="@+id/request_received_content"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:gravity="center"
-                android:padding="24dp"
-                android:layout_marginTop="32dp"
-                android:visibility="gone"
-                app:layout_constraintTop_toBottomOf="@id/subtitle_text"
-                app:layout_constraintStart_toStartOf="@id/subtitle_text"
-                app:layout_constraintEnd_toEndOf="@id/subtitle_text">
-
-                <TextView
-                    android:id="@+id/request_received_text"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textAlignment="center"
-                    android:textAppearance="?attr/textAppearanceTitleMedium"
-                    tools:text="Пользователь Имярек хочет создать с вами пару."/>
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginTop="24dp">
-
-                    <com.google.android.material.button.MaterialButton
-                        android:id="@+id/decline_request_button"
-                        style="?attr/materialButtonOutlinedStyle"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginEnd="16dp"
-                        android:text="Отклонить"/>
-
-                    <com.google.android.material.button.MaterialButton
-                        android:id="@+id/accept_request_button"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Принять"/>
-                </LinearLayout>
-            </LinearLayout>
-
-            <!-- Состояние: В паре -->
-            <LinearLayout
-                android:id="@+id/linked_content"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:gravity="center"
-                android:padding="24dp"
-                android:layout_marginTop="32dp"
-                android:visibility="gone"
-                app:layout_constraintTop_toBottomOf="@id/subtitle_text"
-                app:layout_constraintStart_toStartOf="@id/subtitle_text"
-                app:layout_constraintEnd_toEndOf="@id/subtitle_text">
-
-                <de.hdodenhof.circleimageview.CircleImageView
-                    android:id="@+id/partner_avatar_image"
-                    android:layout_width="96dp"
-                    android:layout_height="96dp"
-                    android:src="@drawable/ic_profile"
-                    app:civ_border_width="2dp"
-                    app:civ_border_color="?attr/colorPrimary"/>
-
-                <TextView
-                    android:id="@+id/partner_name_text"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:textAppearance="?attr/textAppearanceTitleLarge"
-                    tools:text="Имя Партнера"/>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="4dp"
-                    android:text="Ваш партнер"/>
-
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/unlink_button"
-                    style="@style/Widget.Material3.Button.TextButton"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="24dp"
-                    android:text="Разорвать связь"
-                    android:textColor="?attr/colorError"/>
-            </LinearLayout>
-
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
 
-    <!-- Кнопка "Закрыть" (крестик) в углу -->
+    <!-- Состояние 2: ЗАПРОС ОТПРАВЛЕН -->
+    <LinearLayout
+        android:id="@+id/request_sent_content"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:padding="24dp"
+        android:visibility="gone"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:visibility="gone">
+
+        <TextView
+            android:id="@+id/request_sent_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:textAppearance="?attr/textAppearanceTitleMedium"
+            tools:text="Приглашение отправлено. Ожидание ответа..."/>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/cancel_request_button"
+            style="?attr/materialButtonOutlinedStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:text="Отменить запрос"/>
+    </LinearLayout>
+
+    <!-- Состояние 3: ЗАПРОС ПОЛУЧЕН -->
+    <LinearLayout
+        android:id="@+id/request_received_content"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:padding="24dp"
+        android:visibility="gone"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:visibility="gone">
+
+        <TextView
+            android:id="@+id/request_received_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:textAppearance="?attr/textAppearanceTitleMedium"
+            tools:text="Пользователь хочет создать с вами пару."/>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="24dp">
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/decline_request_button"
+                style="?attr/materialButtonOutlinedStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="16dp"
+                android:text="Отклонить"/>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/accept_request_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Принять"/>
+        </LinearLayout>
+    </LinearLayout>
+
+    <!-- Состояние 4: В ПАРЕ -->
+    <LinearLayout
+        android:id="@+id/linked_content"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:padding="24dp"
+        android:visibility="gone"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:visibility="gone">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/partner_avatar_image"
+            android:layout_width="96dp"
+            android:layout_height="96dp"
+            android:src="@drawable/ic_profile"
+            app:civ_border_width="2dp"
+            app:civ_border_color="?attr/colorPrimary"/>
+
+        <TextView
+            android:id="@+id/partner_name_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:textAppearance="?attr/textAppearanceTitleLarge"
+            tools:text="Имя Партнера"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="Ваш партнер"/>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/unlink_button"
+            style="@style/Widget.Material3.Button.TextButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:text="Разорвать связь"
+            android:textColor="?attr/colorError"/>
+    </LinearLayout>
+
+    <!-- Кнопка "Закрыть" и ProgressBar теперь в конце, чтобы быть поверх всего -->
     <ImageButton
         android:id="@+id/close_button"
         style="@style/Widget.AppCompat.Button.Borderless"
         android:layout_width="48dp"
         android:layout_height="48dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
         android:src="@drawable/ic_close"
+        android:elevation="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         android:contentDescription="Закрыть" />
 
-    <!-- ProgressBar, который показывается во время загрузки -->
     <ProgressBar
         android:id="@+id/progress_bar"
         android:layout_width="wrap_content"
@@ -355,6 +357,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:visibility="gone"
-        tools:visibility="visible"/>
+        tools:visibility="gone"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

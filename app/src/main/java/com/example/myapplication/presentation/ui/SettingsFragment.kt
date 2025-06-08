@@ -4,15 +4,24 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.viewModelScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.myapplication.R
+import com.example.myapplication.SupabaseInit
 import com.example.myapplication.databinding.FragmentSettingsBinding
+import com.example.myapplication.presentation.AuthUiState
+import com.example.myapplication.presentation.AuthViewModel
 import com.example.myapplication.presentation.adapters.SettingsAdapter
 import com.example.myapplication.presentation.models.SettingsItem
 import com.example.myapplication.presentation.models.SettingsSection
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import io.github.jan.supabase.auth.auth
+import kotlinx.coroutines.launch
 
 class SettingsFragment : Fragment() {
 
@@ -51,13 +60,47 @@ class SettingsFragment : Fragment() {
         }
     }
 
+    private fun showLogoutConfirmationDialog() {
+        MaterialAlertDialogBuilder(requireContext())
+            .setTitle("Выход из аккаунта")
+            .setMessage("Вы уверены, что хотите выйти?")
+            .setPositiveButton("Выйти") { _, _ ->
+                performLogout()
+            }
+            .setNegativeButton("Отмена", null)
+            .show()
+    }
+
+    private fun performLogout() {
+        lifecycleScope.launch {
+            try {
+                SupabaseInit.client.auth.signOut()
+
+                Toast.makeText(
+                    requireContext(),
+                    "Вы успешно вышли из аккаунта",
+                    Toast.LENGTH_SHORT
+                ).show()
+
+            } catch (e: Exception) {
+                Toast.makeText(
+                    requireContext(),
+                    "Ошибка при выходе: ${e.localizedMessage}",
+                    Toast.LENGTH_LONG
+                ).show()
+            }
+        }
+    }
 
     private fun setupRecyclerView() {
         settingsAdapter = SettingsAdapter { settingItem ->
             // Обработка нажатия на элемент настроек
             when (settingItem.id) {
                 "logout" -> {
-                    // Реализация выхода из аккаунта
+                    showLogoutConfirmationDialog()
+                }
+                "pair" -> {
+                    findNavController().navigate(R.id.action_settingsFragment_to_pairingFragment)
                 }
                 else -> {
                     // Навигация к соответствующему экрану настроек
@@ -85,7 +128,7 @@ class SettingsFragment : Fragment() {
                 items = listOf(
                     SettingsItem(id = "profile", title = "Профиль", iconResId = R.drawable.ic_user),
                     SettingsItem(id = "change_password", title = "Изменить пароль", iconResId = R.drawable.ic_user),
-                    SettingsItem(id = "paired_id", title = "Пригласить партнера", iconResId = R.drawable.ic_pair)
+                    SettingsItem(id = "pair", title = "Связь с партнером", iconResId = R.drawable.ic_pair)
                 )
             ),
             SettingsSection(

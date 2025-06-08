@@ -5,6 +5,7 @@ import android.content.ClipboardManager
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -52,61 +53,58 @@ class PairingFragment : Fragment() {
         setupClickListeners()
     }
 
+    // В файле PairingFragment.kt
+
     private fun observeViewModel() {
         // 1. Подписываемся на ЕДИНОЕ состояние UI
         viewModel.uiState.observe(viewLifecycleOwner) { state ->
-            // Сначала все скрываем, чтобы избежать наложения состояний
+            // Сначала делаем ВСЕ контейнеры невидимыми.
+            // Это гарантирует, что на экране не останется "мусора" от предыдущего состояния.
+            Log.d("PairingFragment", "Получено новое состояние UI: $state")
             binding.progressBar.isVisible = false
-            binding.contentContainer.isVisible = false // Скрываем основной ScrollView с карточками
-            // ... скрой здесь другие контейнеры, если ты их создавала ...
-            // binding.requestSentContent.isVisible = false
-            // binding.requestReceivedContent.isVisible = false
-            // binding.linkedContent.isVisible = false
+            binding.noLinkContent.isVisible = false
+            binding.requestSentContent.isVisible = false
+            binding.requestReceivedContent.isVisible = false
+            binding.linkedContent.isVisible = false
 
-            // Теперь показываем нужное состояние
+            // Теперь показываем ТОЛЬКО ОДИН нужный контейнер
             when (state) {
                 is PairingUiState.Loading -> {
                     binding.progressBar.isVisible = true
                 }
                 is PairingUiState.NoLink -> {
-                    // Показываем основной контейнер с двумя карточками
-                    binding.contentContainer.isVisible = true
-                    binding.yourCodeText.text = state.userCode
+                    binding.noLinkContent.isVisible = true
+                    binding.yourCodeText.text = state.userCode.replace("-", " - ")
                     currentUserCode = state.userCode
                 }
                 is PairingUiState.RequestSent -> {
-                    // TODO: Показать контейнер "Запрос отправлен"
-                    // binding.requestSentContent.isVisible = true
-                    // binding.requestSentText.text = "Ожидание ответа от ${state.partnerName ?: "..."}"
+                    binding.requestSentContent.isVisible = true
+                    binding.requestSentText.text = "Приглашение отправлено пользователю ${state.partnerName ?: "..."}. Ожидание ответа."
                 }
                 is PairingUiState.RequestReceived -> {
-                    // TODO: Показать контейнер "Запрос получен"
-                    // binding.requestReceivedContent.isVisible = true
-                    // binding.requestReceivedText.text = "${state.partnerName ?: "..."} хочет создать пару"
+                    binding.requestReceivedContent.isVisible = true
+                    binding.requestReceivedText.text = "${state.partnerName ?: "Пользователь"} хочет создать с вами пару."
                 }
                 is PairingUiState.Linked -> {
-                    // TODO: Показать контейнер "В паре"
-                    // binding.linkedContent.isVisible = true
-                    // binding.partnerNameText.text = state.partnerName
+                    binding.linkedContent.isVisible = true
+                    binding.partnerNameText.text = state.partnerName ?: "Ваш партнер"
                 }
                 is PairingUiState.Error -> {
-                    // TODO: Показать заглушку с ошибкой
-                    Toast.makeText(requireContext(), state.message, Toast.LENGTH_LONG).show()
+                    // Если ошибка, можно показать основной экран с кодом, но с Toast-ом
+                    binding.noLinkContent.isVisible = true
+                    Toast.makeText(requireContext(), "Ошибка: ${state.message}", Toast.LENGTH_LONG).show()
                 }
             }
         }
 
-        // 2. Подписываемся на ОДНОРАЗОВОЕ событие результата связывания
+        // 2. Подписка на результат связывания (остается без изменений)
         viewModel.pairingResultEvent.observe(viewLifecycleOwner) { event ->
             event.getContentIfNotHandled()?.let { result ->
-                // Этот код сработает только один раз после нажатия "Создать пару"
                 when (result) {
                     is PairingResult.Success -> {
                         Toast.makeText(requireContext(), "Успех! Обновляем статус...", Toast.LENGTH_SHORT).show()
-                        // UI обновится сам, так как ViewModel вызовет fetchStatus()
                     }
                     is PairingResult.Error -> {
-                        // Показываем ошибку в поле ввода
                         binding.partnerCodeInputLayout.error = result.message
                     }
                 }

@@ -53,6 +53,7 @@ class PairingViewModel(
                 val status = repository.getPairingStatus()
                 // Отправляем результат в UI
                 _uiState.postValue(status)
+                Log.d("PairingViewModel", "Отправляем в UI новое состояние: $status")
                 Log.d("PairingViewModel", "Статус успешно загружен: $status")
             } catch (e: Exception) {
                 // В случае ошибки отправляем в UI состояние ошибки
