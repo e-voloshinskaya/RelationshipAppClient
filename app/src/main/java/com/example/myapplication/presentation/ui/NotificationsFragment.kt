@@ -1,4 +1,3 @@
-// presentation/ui/NotificationsFragment.kt
 package com.example.myapplication.presentation.ui
 
 import android.os.Bundle

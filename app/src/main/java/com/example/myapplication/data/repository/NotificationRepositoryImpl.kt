@@ -19,14 +19,13 @@ import kotlinx.serialization.json.Json
 import java.text.SimpleDateFormat
 import java.util.*
 
-class NotificationRepository {
+class NotificationRepositoryImpl {
     private val client = SupabaseInit.client
     private val json = Json { ignoreUnknownKeys = true }
 
     // Канал для realtime подписки
     private var notificationChannel: io.github.jan.supabase.realtime.RealtimeChannel? = null
 
-    // Подписка на новые уведомления через Realtime
     // Подписка на новые уведомления через Realtime
     suspend fun subscribeToNotifications(scope: CoroutineScope): Flow<NotificationDto> {
         val userId = client.auth.currentUserOrNull()?.id
@@ -45,7 +44,7 @@ class NotificationRepository {
         // Подписываемся на канал
         channel.subscribe()
 
-        // КОСТЫЛЬ: Фильтруем на клиенте
+        // Фильтруем на клиенте
         return flow.map { action ->
             // Декодируем JsonObject в NotificationDto
             json.decodeFromString<NotificationDto>(action.record.toString())

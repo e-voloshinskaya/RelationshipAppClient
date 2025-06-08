@@ -27,13 +27,19 @@ class SupabaseInit : Application() {
     override fun onCreate() {
         super.onCreate()
 
+        val customHttpClient = HttpClient(OkHttp) {
+            install(WebSockets)
+        }
         // Создаем клиент и СРАЗУ ЖЕ присваиваем его нашей статической переменной
         client = createSupabaseClient(
             supabaseUrl = "https://nyoacaexqlvltqyxaalx.supabase.co", // твой URL
-            supabaseKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im55b2FjYWV4cWx2bHRxeXhhYWx4Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDU3NTY3MzAsImV4cCI6MjA2MTMzMjczMH0.Lzxs5ULg6V7Zd6GL8RrF-ehRVTKlH86w1k4dXgwi3NI"  // твой anon key
+            supabaseKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im55b2FjYWV4cWx2bHRxeXhhYWx4Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDU3NTY3MzAsImV4cCI6MjA2MTMzMjczMH0.Lzxs5ULg6V7Zd6GL8RrF-ehRVTKlH86w1k4dXgwi3NI"
+
         ) {
-            install(Postgrest)
+            // 3. Используем кастомный HTTP-клиент
+            //httpClient = customHttpClient
             install(Realtime)
+            install(Postgrest)
             install(Storage)
             install(Functions)
             install(Auth) {
